@@ -1,7 +1,7 @@
 import React from 'react';
 import {auth} from './auth/Authentication';
 import { useState, useEffect } from "react";
-import { onAuthStateChanged } from "firebase/auth";
+import { onAuthStateChanged, signOut} from "firebase/auth";
 
 function Navbar() {
   const [user, setUser] = useState("");
@@ -23,6 +23,16 @@ function Navbar() {
       }
     });
   }, []);
+
+  const logout = async () => {
+    try {
+      await signOut(auth);
+      // set
+      console.log("Signed out");
+    } catch (error) {
+      console.log("error")
+    }
+  };
 
   return (
     <nav className="navbar navbar-expand-lg navbar-dark fixed-top" >
@@ -53,7 +63,7 @@ function Navbar() {
                   <li><a className="dropdown-item" href="/Register">Register</a></li>
                   <li><a className="dropdown-item" href="/Settings">Settings</a></li>
                   <hr className="dropdown-divider"/>
-                  <li><a className="dropdown-item" href="#">Logout</a></li>
+                  <li><a className="dropdown-item" onClick = {logout}>Logout</a></li>
                 </ul>
                 <div>
                   {isUser == true ? "Signed in as " + user : "Not signed in"}
