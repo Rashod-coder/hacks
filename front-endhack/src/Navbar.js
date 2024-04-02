@@ -19,6 +19,7 @@ function Navbar() {
         console.log(image);
       } else {
         setUser("");
+        setIsUser(false);
         setImage("./images/blankpfp.png");
       }
     });
@@ -29,6 +30,7 @@ function Navbar() {
       await signOut(auth);
       // set
       console.log("Signed out");
+      setIsUser(false);
     } catch (error) {
       console.log("error")
     }

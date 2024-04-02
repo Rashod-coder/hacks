@@ -24,6 +24,14 @@ function Register() {
       console.log("Successful");
       // setLoggedIn(true);
       console.log(registerEmail);
+
+      try {
+        await signOut(auth);
+        // set
+        console.log("Signed out");
+      } catch (error) {
+        console.log("error")
+      }
       // navigate('/');
     } catch (error) {
       console.log(error.errorMessage);
@@ -34,7 +42,7 @@ function Register() {
 
   return (
     <div id = "box"className='wrapper'>
-      {/* <form> */}
+      <form>
         <h1>Registration</h1>
         <div className='input-box'>
           <input type="text" placeholder='First Name' name="firstName" onChange={(event) => {
@@ -60,7 +68,7 @@ function Register() {
           <a>Already have an account? <Link to="/login">Sign in</Link></a>
         </div>
         <button id = "submit" type='submit' onClick = {register}>Create Account</button>
-      {/* </form> */}
+      </form>
     </div>
   );
 }
