@@ -36,7 +36,7 @@ function Register() {
       );
       console.log("Successful");
       // setLoggedIn(true);
-      console.log(registerEmail);
+      console.log(user.user.uid);
 
       try {
         await signOut(auth);
