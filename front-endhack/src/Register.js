@@ -1,72 +1,66 @@
 // Login.js
 import React, { useState } from 'react'; // Import React and useState
-import axios from 'axios';
+import {auth} from './auth/Authentication'
+import {createUserWithEmailAndPassword} from 'firebase/auth';
 import './Register.css';
 import { Link, useNavigate } from 'react-router-dom';
 
 function Register() {
-  const [values, setValues] = useState({
-    email: '',
-    password: '',
-    firstName: '',
-    lastName: ''
-  });
+  const [registerEmail, setRegisterEmail] = useState("");
+  const [registerPassword, setRegisterPassword] = useState("");
 
-  const handleChange = (event) => {
-    // Update the corresponding input field in the state
-    setValues({ ...values, [event.target.name]: event.target.value });
-  };
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
 
   const navigate = useNavigate();
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    axios.post('http://localhost:8801', values)
-      .then(res => {
-        if (res.data.Status === "Success") {
-          navigate('/');
-          window.alert("Account Created");
-        } else {
-          window.alert("An unexpected error occurred."); 
-        }
-      })
-      .catch(err => {
-        if (err.response && err.response.data) {
-          if (err.response.data.Error === "Email already exists") {
-            window.alert("Email is in use please use a different email"); 
-          } else {
-            window.alert("An error occurred: " + (err.response.data.Error || "Please try again later."));
-          }
-        } else {
-          // Handle cases where the error response is not available
-          console.log(err); // For debugging
-          window.alert("An error occurred, please try again later.");
-        }
-      });
+  const register = async () => {
+    console.log("hello!");
+    try {
+      const user = await createUserWithEmailAndPassword(
+        auth,
+        registerEmail,
+        registerPassword
+      );
+      console.log("Successful");
+      // setLoggedIn(true);
+      console.log(registerEmail);
+      // navigate('/');
+    } catch (error) {
+      console.log(error.errorMessage);
+    }
   };
+
   
 
   return (
-    <div className='wrapper'>
-      <form onSubmit={handleSubmit} action="">
+    <div id = "box"className='wrapper'>
+      {/* <form> */}
         <h1>Registration</h1>
         <div className='input-box'>
-          <input type="text" placeholder='First Name' name="firstName" required onChange={handleChange} />
+          <input type="text" placeholder='First Name' name="firstName" onChange={(event) => {
+            setFirstName(event.target.value);
+          }}/>
         </div>
         <div className='input-box'>
-          <input type="text" placeholder='Last Name' name="lastName" required onChange={handleChange} />
+          <input type="text" placeholder='Last Name' name="lastName" onChange={(event) => {
+            setLastName(event.target.value);
+          }}/>
         </div>
         <div className='input-box'>
-          <input type="text" placeholder='Email' name="email" required onChange={handleChange} />
+          <input type="text" placeholder='Email' name="email"  onChange={(event) => {
+            setRegisterEmail(event.target.value);
+          }}/>
         </div>
         <div className='input-box'>
-          <input type="password" placeholder='Password' name="password" required onChange={handleChange} />
+          <input type="password" placeholder='Password' name="password"  onChange={(event) => {
+            setRegisterPassword(event.target.value);
+          }}/>
         </div>
         <div className='input-box'>
-          <a>Already have an account? <Link to="/signin">Sign in</Link></a>
+          <a>Already have an account? <Link to="/login">Sign in</Link></a>
         </div>
-        <button type='submit'>Create Account</button>
-      </form>
+        <button id = "submit" type='submit' onClick = {register}>Create Account</button>
+      {/* </form> */}
     </div>
   );
 }

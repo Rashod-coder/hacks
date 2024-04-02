@@ -101,7 +101,7 @@ function Login() {
           <h1 id = "signIn">Or</h1>
           <GoogleButton id = "googleSignIn"onClick = {googleSignIn}/>
         </div>
-        <a>Don't  have an account? <Link to="/login"> Sign up</Link> </a>
+        <a>Don't  have an account? <Link to="/register"> Sign up</Link> </a>
         
 
       </form>

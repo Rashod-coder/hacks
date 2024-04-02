@@ -43,8 +43,8 @@
     margin-bottom: 10px;
   }
   
-  button {
-    width: 100%;
+  #submit {
+    width: 150px;
     padding: 10px;
     background-color: #007bff; /* Bootstrap primary color */
     color: white;
