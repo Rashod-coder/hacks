@@ -1,7 +1,29 @@
 import React from 'react';
-
+import auth from './auth/Authentication';
+import { useState, useEffect } from "react";
+import { onAuthStateChanged } from "firebase/auth";
 
 function Navbar() {
+  const [user, setUser] = useState("");
+  const [image, setImage] = useState("./images/b lankpfp.png");
+  const [isUser, setIsUser] = useState(false);
+  console.log(image);
+  // useEffect(() => {
+  //   onAuthStateChanged(auth, (currentUser) => {
+  //     if (currentUser) setIsUser(true);
+  //     if (currentUser && currentUser.displayName)
+  //       setUser(currentUser?.displayName);
+  //     //we can also set up an image url
+  //     if (currentUser && currentUser.photoURL) {
+  //       setImage(currentUser.photoURL);
+  //       console.log(image);
+  //     } else {
+  //       setUser("");
+  //       setImage("./images/blankpfp.png");
+  //     }
+  //   });
+  // }, []);
+
   return (
     <nav className="navbar navbar-expand-lg navbar-dark fixed-top" >
       <div className="container fs-5">
@@ -33,6 +55,9 @@ function Navbar() {
                   <hr className="dropdown-divider"/>
                   <li><a className="dropdown-item" href="#">Logout</a></li>
                 </ul>
+                <div>
+                  {isUser == true ? "Signed in as " + user : "Not signed in"}
+                </div>
               </li>
             </ul>
             

@@ -2,12 +2,58 @@ import React, { useState, useEffect  } from 'react';
 import './Login.css'; // Use the same CSS file for both login and signin pages for consistent styling.
 import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom'; // Import useNavigate
+import {GoogleButton} from "react-google-button"
+import {
+  onAuthStateChanged,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  signOut,
+  GoogleAuthProvider,
+  signInWithPopup,
+} from "firebase/auth";
+import {auth} from "./auth/Authentication"
+
 
 function Login() {
   const [values, setValues] = useState({
     email: '',
     password: ''
   });
+
+  const [registerEmail, setRegisterEmail] = useState("");
+  const [registerPassword, setRegisterPassword] = useState("");
+
+  const [loginEmail, setLoginEmail] = useState("");
+  const [loginPassword, setLoginPassword] = useState("");
+
+  const [user, setUser] = useState("");
+
+  
+  const googleSignIn = async () => {
+    const provider = new GoogleAuthProvider();
+    signInWithPopup(auth, provider)
+      .then((result) => {
+        // This gives you a Google Access Token. You can use it to access the Google API.
+        const credential = provider.credentialFromResult(result);
+        if (credential != null) {
+          const token = credential.accessToken;
+          const USER = result.user.displayName;
+          // result.user
+          if (USER != null) setUser(USER);
+          // console.log(USER);
+        }
+        console.log("Here");
+        // The signed-in user info.
+        // IdP data available using getAdditionalUserInfo(result)
+        // ...
+      })
+      .catch((error) => {
+        const errorMessage = error.message;
+        console.log(errorMessage);
+      });
+  };
+
+
 
   const navigate = useNavigate(); // Define navigate function
   axios.defaults.withCredentials = true;
@@ -29,7 +75,7 @@ function Login() {
   return (
     <div className="wrapper"> 
       <form onSubmit={handleSubmit}>
-        <h1>Sign In</h1>
+        <h1 id = "signIn">Sign In</h1>
         <div className="input-box">
           <input
             type="email"
@@ -51,6 +97,10 @@ function Login() {
         <button type="submit">Sign In</button>
         <br/>
         <br/>
+        <div>
+          <h1 id = "signIn">Or</h1>
+          <GoogleButton id = "googleSignIn"onClick = {googleSignIn}/>
+        </div>
         <a>Don't  have an account? <Link to="/login"> Sign up</Link> </a>
         
 
