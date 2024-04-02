@@ -1,8 +1,9 @@
 // Login.js
 import React, { useState } from 'react'; // Import React and useState
 import {auth} from './auth/Authentication'
-import {createUserWithEmailAndPassword} from 'firebase/auth';
+import {createUserWithEmailAndPassword, signOut} from 'firebase/auth';
 import './Register.css';
+import axios from 'axios'
 import { Link, useNavigate } from 'react-router-dom';
 
 function Register() {
@@ -13,6 +14,18 @@ function Register() {
   const [lastName, setLastName] = useState("");
 
   const navigate = useNavigate();
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    axios.post('http://localhost:8801/signin', firstName+" "+lastName)
+      .then(res => {
+        if (res.data.Status === "Success") {
+          navigate('/Dashboard');
+        } else {
+          alert(res.data.Error);
+        }
+      })  
+      .catch(err => console.log(err)); 
+  };
   const register = async () => {
     console.log("hello!");
     try {
@@ -42,7 +55,7 @@ function Register() {
 
   return (
     <div id = "box"className='wrapper'>
-      <form>
+      <form onSubmit = {handleSubmit}>
         <h1>Registration</h1>
         <div className='input-box'>
           <input type="text" placeholder='First Name' name="firstName" onChange={(event) => {
