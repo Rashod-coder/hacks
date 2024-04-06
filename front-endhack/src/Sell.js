@@ -9,6 +9,7 @@ function Sell() {
     const [maxAmt, setMaxAmt] = useState(1);
     const [minAmt, setMinAmt] = useState(0);
     const [type, setType] = useState("");
+    // :)
 
     const [street, setStreet] = useState("");
     const [city, setCity] = useState("");
