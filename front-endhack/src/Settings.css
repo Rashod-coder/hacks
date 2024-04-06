@@ -1,0 +1,67 @@
+/* Settings.css */
+
+.settings-container {
+  background-image: url('splash85.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat; /* Ensure the background image doesn't repeat */
+  color: #fff; /* Text color is white for better contrast */
+  padding: 40px;
+  border-radius: 8px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.3); /* Improved box shadow for depth */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* Set height to full viewport height */
+  width: 100%; /* Set width to full viewport width */
+}
+
+  .settings-container h1 {
+    font-size: 28px;
+    margin-bottom: 20px;
+  }
+  
+  .settings-container p {
+    font-size: 16px;
+    line-height: 1.5; /* Improved readability with increased line height */
+    margin-bottom: 20px;
+  }
+  
+  .form-group {
+    margin-bottom: 20px;
+  }
+  
+  .form-group label {
+    display: block;
+    font-size: 18px;
+    margin-bottom: 8px;
+  }
+  
+  .form-group input[type="text"] {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    border: none;
+    border-radius: 4px;
+    background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent white background */
+    color: #333; /* Input text color */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Subtle box shadow for input fields */
+  }
+  
+  button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 14px 28px;
+    font-size: 16px;
+    border-radius: 4px;
+    width: 150px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  button:hover {
+    background-color: #0056b3;
+  }
+  

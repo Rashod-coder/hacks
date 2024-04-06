@@ -37,7 +37,7 @@ function Navbar() {
   return (
     <nav className="navbar navbar-expand-lg navbar-dark fixed-top" >
       <div className="container fs-5">
-        <a className="navbar-brand " href="/">Home</a>
+        <a className="navbar-brand " href="/">Fresh For All</a>
         <button className="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
           <span className="navbar-toggler-icon"></span>
         </button>
