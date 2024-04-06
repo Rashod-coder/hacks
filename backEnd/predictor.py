@@ -1,4 +1,4 @@
-from flask import Flask, Request, jsonify
+from flask import Flask, request, jsonify
 import numpy as np
 import pandas as pd
 from sklearn.compose import ColumnTransformer
@@ -24,13 +24,27 @@ regressor.fit(X_train, y_train)
 
 @app.route('/predict', methods=['POST'])
 def predict():
-    data = Request.get_json()
+    data = request.get_json()
     pounds = float(data['pounds'])
-    day_of_week = int(data['day_of_week'])
+    day_of_week = [0] * 7 
+    day_index = int(data['day_of_week'])
+    day_of_week[day_index - 1] = 1 
     seasonal_yield = float(data['seasonal_yield'])
     user_input = np.array([[day_of_week, seasonal_yield, pounds]])
     prediction = regressor.predict(user_input)
     return jsonify({'prediction': prediction[0]})
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(port=5001, debug=True)
+
+
+    import requests
+
+    url = 'http://localhost:5000/predict'
+    data = {
+        'pounds': 10,
+        'day_of_week': 1,
+        'seasonal_yield': 17
+    }
+    response = requests.post(url, json=data)
+    print(response.json()) 
