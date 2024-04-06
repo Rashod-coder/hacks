@@ -13,6 +13,7 @@ function Sell() {
     const [street, setStreet] = useState("");
     const [city, setCity] = useState("");
     const [zipcode, setZipcode] = useState("");
+    const [image, setImage] = useState("");
 
     const keepDatabase = async () => {
         try {
