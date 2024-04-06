@@ -1,0 +1,50 @@
+/* login.css */
+.wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh; /* Makes sure the wrapper takes up full viewport height */
+    background-image: url('./splash85.jpg'); /* Set the background image */
+    background-size: cover; /* Cover the entire container with the image */
+    background-position: center; /* Center the image */
+    background-repeat: no-repeat; /* Prevent repeating the image */
+}
+  h1 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 30px;
+  }
+  
+  .input-box {
+    margin-bottom: 25px;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .input-box input[type="text"] {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    outline: none;
+  }
+  
+  .input-box label {
+    margin-left: 5px;
+    margin-bottom: 10px;
+  }
+  
+  #submit {
+    width: 150px;
+    padding: 10px;
+    background-color: #007bff; /* Bootstrap primary color */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  
+  button:hover {
+    background-color: #0056b3; /* Darken the button a bit when hovering */
+  }
+  
