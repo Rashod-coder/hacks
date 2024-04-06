@@ -14,6 +14,9 @@ function Sell() {
     const [city, setCity] = useState("");
     const [zipcode, setZipcode] = useState("");
 
+    const [image, setImage] = useState(null);
+    const [fileName, setFileName] = useState("No selected file");
+
     const keepDatabase = async () => {
         try {
             const docRef = await addDoc(collection(db, "Orders"), {
@@ -60,7 +63,24 @@ function Sell() {
                         <div className="form-group">
                             <input type="text" className="form-control" placeholder="Zipcode" name="zipcode" onChange={(event) => setZipcode(event.target.value)} />
                         </div>
+                        <form action = "" onClick = {() => document.querySelector(".input-field").click()}>
+                            <input type = "file" accept = "image/*" className = "input-field" hidden onChange = {({target: {files}}) => {
+                                if(files[0]){
+                                    setFileName(files[0].name);
+                                }
+                                if(files){
+                                    setImage(URL.createObjectURL(files[0]));
+                                    setFileName(URL.createObjectURL(files[0]));
+                                    console.log(image);
+                                }
+                                else{
+
+                                }
+                            }}></input>
+                        </form>
+                            
                         <button type="button" className="btn btn-primary btn-block" onClick={keepDatabase}>Upload</button>
+
                     </form>
                 </div>
             </div>
