@@ -1,50 +1,66 @@
-/* login.css */
-.wrapper {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh; /* Makes sure the wrapper takes up full viewport height */
-    background-image: url('./splash85.jpg'); /* Set the background image */
-    background-size: cover; /* Cover the entire container with the image */
-    background-position: center; /* Center the image */
-    background-repeat: no-repeat; /* Prevent repeating the image */
+/* Sell.css */
+.sell-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh; /* Makes sure the container takes up full viewport height */
+  background-image: url('./splash85.jpg'); /* Set the background image */
+  background-size: cover; /* Cover the entire container with the image */
+  background-position: center; /* Center the image */
+  background-repeat: no-repeat; /* Prevent repeating the image */
 }
-  h1 {
-    text-align: center;
-    color: #333;
-    margin-bottom: 30px;
-  }
+
+.sell-form {
+  background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent white background for the form */
+  padding: 20px;
+  max-width: 600px; /* Set maximum width for the form */
+  width: 500px; /* Make sure form fills its parent container */
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Shadow effect */
   
-  .input-box {
-    margin-bottom: 25px;
-    display: flex;
-    flex-direction: column;
+}
+
+.sell-form .form-group {
+  margin-bottom: 2  0px; /* Add spacing between form elements */
+}
+
+.sell-form input[type="text"] {
+  border-radius: 5px;
+  border: 1px solid #ccc; /* Gray border */
+  padding: 10px;
+  width: 100%;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.sell-form input[type="text"]:focus {
+  border-color: #80bdff; /* Focus color */
+  outline: 0;
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25); /* Focus shadow */
+}
+
+.sell-form button {
+  border-radius: 5px;
+  padding: 10px;
+  width: 100%;
+  font-size: 16px;
+  background-color: #007bff; /* Bootstrap primary color */
+  color: white;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.sell-form button:hover {
+  background-color: #0056b3; /* Darken the button a bit when hovering */
+}
+@media (min-width: 576px) {
+  .sell-form {
+    height: 400px; /* Adjust the height as needed */
   }
-  
-  .input-box input[type="text"] {
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    outline: none;
+}
+
+@media (min-width: 768px) {
+  .sell-form {
+    height: 100%; /* Adjust the height as needed */
   }
-  
-  .input-box label {
-    margin-left: 5px;
-    margin-bottom: 10px;
-  }
-  
-  #submit {
-    width: 150px;
-    padding: 10px;
-    background-color: #007bff; /* Bootstrap primary color */
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
-  }
-  
-  button:hover {
-    background-color: #0056b3; /* Darken the button a bit when hovering */
-  }
-  
+}
