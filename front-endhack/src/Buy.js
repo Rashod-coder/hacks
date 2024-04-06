@@ -2,8 +2,11 @@ import {useState} from 'react'
 import { doc,collection,  getDoc, getDocs, query, where } from "firebase/firestore";
 
 import {db} from "./Firestore/Firestore"
+import Col from 'react-bootstrap/Col';
+import Row from 'react-bootstrap/Row';
 import Card from 'react-bootstrap/Card';
 import ListGroup from 'react-bootstrap/ListGroup';
+import Button from 'react-bootstrap/Button';
 import { Link, useNavigate } from 'react-router-dom';
 
 
@@ -39,6 +42,12 @@ function Buy(){
         setPosts(newPosts); // Update the state with the new array of posts
         console.log("Length: ", newPosts.length);
     };
+
+    const actuallyBuy = async(id) =>{
+        //
+        console.log()
+        
+    }
     // const getDatabase = async() => {
     //     const q = query(collection(db, "Orders"));
     //     const querySnapshot = await getDocs(q);
@@ -65,15 +74,16 @@ function Buy(){
     // }
     return(
         <>
-            <div onLoad = {getDatabase}>
+            <div onReset={getDatabase}>
                 <div></div>
                 <h2>Current Posts</h2>
                 <ul>
+                <Row xs={1} md={1} className="g-4">
                     {posts.map(post => (
                         // <li key = {post.id}>
                         //     {post.id}{' '}   
                         // </li>
-                        <Card style={{ width: '18rem' }}>
+                        <Card style={{ width: '18rem' }} >
                             <Card.Img variant="top" src={post.Image} />
                             <Card.Body>
                                 <Card.Title>{post.Type}</Card.Title>
@@ -81,13 +91,15 @@ function Buy(){
                                     ${post.Price} per Pound
                                 </Card.Text>
                             </Card.Body>
-                            <ListGroup className="list-group-flush">
-                            <ListGroup.Item>{post.Description}</ListGroup.Item>
+                            <ListGroup className="list-group-flush center-button">
+                            {/* <ListGroup.Item>{post.Description}</ListGroup.Item> */}
                             <ListGroup.Item> Minimum amount of pounds: {post.minAmount}</ListGroup.Item>
                             <ListGroup.Item>Vestibulum at eros</ListGroup.Item>
+                            <Button variant = "dark" onClick = {actuallyBuy(post.id)}>Buy now</Button>
                             </ListGroup>
                         </Card>  
                     ))}
+                    </Row>
                 </ul>
                 <div className="posts-container">
                 
