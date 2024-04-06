@@ -7,6 +7,8 @@ import Home from './Home'
 import Settings from './Settings'
 import Sell from "./Sell"
 import Buy from "./Buy"
+import { collection, getDocs, query, where } from "firebase/firestore";
+import { db } from "./Firestore/Firestore";
 
 function App() {
   return (
@@ -21,7 +23,7 @@ function App() {
           <Route path="/Settings" element={<Settings />} />
           <Route path="/Sell" element={<Sell />} />
           <Route path="/Buy" element={<Buy />} />
-
+          
           
          
 
