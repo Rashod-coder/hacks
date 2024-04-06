@@ -27,8 +27,17 @@ function Login() {
   const [loginPassword, setLoginPassword] = useState("");
 
   const [user, setUser] = useState("");
+  const [uid, setUid] = useState("");
 
-  
+  useEffect(() => {
+    onAuthStateChanged(auth, (currentUser) => {
+      if (currentUser){
+        setUid(currentUser?.uid);
+        console.log(uid);
+      }
+
+    }); 
+  }, []);
   const googleSignIn = async () => {
     const provider = new GoogleAuthProvider();
     signInWithPopup(auth, provider)
@@ -43,6 +52,8 @@ function Login() {
           // console.log(USER);
         }
         console.log("Here");
+        console.log(result.user.uid);
+        // setUser(result.user.uid);
         // The signed-in user info.
         // IdP data available using getAdditionalUserInfo(result)
         // ...
@@ -100,6 +111,7 @@ function Login() {
         <div>
           <h1 id = "signIn">Or</h1>
           <GoogleButton id = "googleSignIn"onClick = {googleSignIn}/>
+          <div>HI {user}</div>
         </div>
         <a>Don't  have an account? <Link to="/register"> Sign up</Link> </a>
         

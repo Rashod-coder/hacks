@@ -7,16 +7,14 @@ function Navbar() {
   const [user, setUser] = useState("");
   const [image, setImage] = useState("./images/b lankpfp.png");
   const [isUser, setIsUser] = useState(false);
-  console.log(image);
   useEffect(() => {
     onAuthStateChanged(auth, (currentUser) => {
       if (currentUser) setIsUser(true);
       if (currentUser && currentUser.displayName)
-        setUser(currentUser?.displayName);
+        setUser(currentUser?.uid + currentUser.displayName);
       //we can also set up an image url
       if (currentUser && currentUser.photoURL) {
         setImage(currentUser.photoURL);
-        console.log(image);
       } else {
         setUser("");
         setIsUser(false);
