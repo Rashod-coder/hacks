@@ -89,7 +89,7 @@ function Register() {
 
   return (
     <div id = "box"className='wrapper'>
-      {/* <form > */}
+      <div className='register-container'>
         <h1>Registration</h1>
         <div className='input-box'>
           <input type="text" placeholder='First Name' name="firstName" onChange={(event) => {
@@ -122,6 +122,8 @@ function Register() {
         <button id = "submit" type='submit' onClick = {keepDatabase}>Create Account</button>
       {/* </form> */}
     </div>
+    </div>
+
   );
 }
 

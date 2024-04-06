@@ -5,7 +5,7 @@ import { onAuthStateChanged, signOut } from "firebase/auth";
 import { useNavigate } from 'react-router-dom';
 
 
-function Navbar() {
+function Navbar({ firstName, lastName }) {
   const [user, setUser] = useState("");
   const [image, setImage] = useState("./images/blankpfp.png");
   const [isUser, setIsUser] = useState(false);
@@ -66,7 +66,7 @@ function Navbar() {
               </li>
               <li className="nav-item dropdown">
                 <a className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  {isUser ? user : "Account"} {/* Display user's name if logged in, otherwise display "Account" */}
+                {firstName && lastName ? `${firstName} ${lastName}` : "Account"} {/* Display firstName and lastName if available, otherwise display "Account" */}
                 </a>
                 <ul className="dropdown-menu">
                   {!isUser && (

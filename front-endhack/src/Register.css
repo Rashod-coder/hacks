@@ -10,6 +10,14 @@
     background-repeat: no-repeat; /* Prevent repeating the image */
 }
   
+.register-container {
+  max-width: 400px; /* Adjust the max width as needed */
+  margin: 0 auto; /* Center the container horizontally */
+  padding: 20px; /* Add some padding for spacing */
+  border: 1px solid #ccc; /* Add a border for visual separation */
+  border-radius: 5px; /* Add border radius for rounded corners */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add a subtle shadow effect */
+}
   
   
   h1 {

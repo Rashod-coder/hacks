@@ -12,6 +12,8 @@ import {
   signInWithPopup,
 } from "firebase/auth";
 import {auth} from "./auth/Authentication"
+import { collection, getDocs, query, where } from "firebase/firestore";
+import { db } from "./Firestore/Firestore";
 
 
 function Login() {
@@ -22,6 +24,9 @@ function Login() {
 
   const [loginEmail, setLoginEmail] = useState("");
   const [loginPassword, setLoginPassword] = useState("");
+
+  const [firstName, setFirstName] = useState(""); // Declare firstName state and its setter function
+  const [lastName, setLastName] = useState(""); // Declare lastName state and its setter function
 
   const [user, setUser] = useState("");
   const [uid, setUid] = useState("");
@@ -47,7 +52,19 @@ function Login() {
       // console.log(user);
       // navigate("/login");
       console.log(user);
-      navigate("/Home");
+      const usersRef = collection(db, "users");
+      const q = query(usersRef, where("email", "==", values.email));
+      const querySnapshot = await getDocs(q);
+
+      if (!querySnapshot.empty) {
+        querySnapshot.forEach((doc) => {
+          setFirstName(doc.data().firstName);
+          setLastName(doc.data().lastName);
+        });
+      } else {
+        console.log("User email does not exist in database");
+      }
+      navigate("/");
     } catch (error) {
       console.log("TEST", values.email, values.password);
     }
