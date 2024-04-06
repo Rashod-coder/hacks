@@ -20,7 +20,8 @@ function Sell() {
     const [fileName, setFileName] = useState("No selected file");
     const handleImageChange = (event) => {
         const selectedImage = event.target.files[0]; // Get the first file from the selected files array
-        setImage(selectedImage); // Set the selected image to the image state
+        
+        setImage(URL.createObjectURL(selectedImage)); // Set the selected image to the image state
     }
     const keepDatabase = async () => {
         try {
