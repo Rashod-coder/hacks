@@ -57,6 +57,9 @@ import { db } from "./Firestore/Firestore";
 
         
       }
+      else{
+        setUser("");
+      }
       // if (currentUser) {
       //   setIsUser(true);
       //   setUser(currentUser?.displayName); // Set user's display name
