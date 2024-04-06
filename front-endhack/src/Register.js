@@ -3,29 +3,39 @@ import React, { useState } from 'react'; // Import React and useState
 import {auth} from './auth/Authentication'
 import {createUserWithEmailAndPassword, signOut} from 'firebase/auth';
 import './Register.css';
-import axios from 'axios'
 import { Link, useNavigate } from 'react-router-dom';
+import { collection, addDoc } from "firebase/firestore"; 
+import { db } from "./Firestore/Firestore";
 
 function Register() {
   const [registerEmail, setRegisterEmail] = useState("");
   const [registerPassword, setRegisterPassword] = useState("");
-
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
+  const [username, setUsername] = useState("");
+
+
 
   const navigate = useNavigate();
   const handleSubmit = (event) => {
-    event.preventDefault();
-    axios.post('http://localhost:8801/signin', firstName+" "+lastName)
-      .then(res => {
-        if (res.data.Status === "Success") {
-          navigate('/Dashboard');
-        } else {
-          alert(res.data.Error);
-        }
-      })  
-      .catch(err => console.log(err)); 
+    
   };
+
+
+  const keepDatabase = async () => {
+    try {
+        const docRef = await addDoc(collection(db, "users"), {
+            firstName: firstName,
+            lastName: lastName,
+            userName: username,
+            email: registerEmail,
+            password: registerPassword
+        });
+        console.log("Document written with ID: ", docRef.id);
+    } catch (e) {
+        console.error("Error adding document: ", e);
+    }
+}
   const register = async () => {
     console.log("hello!");
     try {
@@ -70,6 +80,11 @@ function Register() {
         <div className='input-box'>
           <input type="text" placeholder='Email' name="email"  onChange={(event) => {
             setRegisterEmail(event.target.value);
+          }}/>
+        </div>
+        <div className='input-box'>
+          <input type="text" placeholder='Username' name="username" onChange={(event) => {
+            setLastName(event.target.value);
           }}/>
         </div>
         <div className='input-box'>
