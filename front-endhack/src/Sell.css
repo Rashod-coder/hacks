@@ -51,7 +51,7 @@
 }
 
 .sell-form button:hover {
-  background-color: #0056b3; /* Darken the button a bit when hovering */
+  background-color: #b2c4d9; /* Darken the button a bit when hovering */
 }
 @media (min-width: 576px) {
   .sell-form {
