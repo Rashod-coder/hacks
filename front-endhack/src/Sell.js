@@ -9,6 +9,7 @@ function Sell() {
     const [maxAmt, setMaxAmt] = useState(1);
     const [minAmt, setMinAmt] = useState(0);
     const [type, setType] = useState("");
+    // :)
 
     const [street, setStreet] = useState("");
     const [city, setCity] = useState("");
@@ -17,7 +18,10 @@ function Sell() {
 
     // const [image, setImage] = useState(null);
     const [fileName, setFileName] = useState("No selected file");
-
+    const handleImageChange = (event) => {
+        const selectedImage = event.target.files[0]; // Get the first file from the selected files array
+        setImage(selectedImage); // Set the selected image to the image state
+    }
     const keepDatabase = async () => {
         try {
             const docRef = await addDoc(collection(db, "Orders"), {
@@ -27,7 +31,8 @@ function Sell() {
                 Price: rate,
                 City: city,
                 Zipcode: zipcode,
-                Type: type
+                Type: type,
+                Image: image 
             });
             console.log("Document written with ID: ", docRef.id);
         } catch (e) {
@@ -64,22 +69,16 @@ function Sell() {
                         <div className="form-group">
                             <input type="text" className="form-control" placeholder="Zipcode" name="zipcode" onChange={(event) => setZipcode(event.target.value)} />
                         </div>
-                        <form action = "" onClick = {() => document.querySelector(".input-field").click()}>
-                            <input type = "file" accept = "image/*" className = "input-field" hidden onChange = {({target: {files}}) => {
-                                if(files[0]){
-                                    setFileName(files[0].name);
-                                }
-                                if(files){
-                                    setImage(URL.createObjectURL(files[0]));
-                                    setFileName(URL.createObjectURL(files[0]));
-                                    console.log(image);
-                                }
-                                else{
-
-                                }
-                            }}></input>
-                        </form>
                             
+                        <div className="form-group">
+                            Upload Image 
+                            <input
+                                type="file"
+                                className="form-control-file"
+                                accept="image/*"  // Specify accepted file types
+                                onChange={handleImageChange} // Handle image selection
+                            />
+                        </div>
                         <button type="button" className="btn btn-primary btn-block" onClick={keepDatabase}>Upload</button>
 
                     </form>

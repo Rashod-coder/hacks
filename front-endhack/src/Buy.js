@@ -38,7 +38,7 @@ function Buy(){
     return(
         <>
             {/* <div>HI</div> */}
-            <Cards></Cards>
+            {<Cards></Cards>}
             {/* <div>HERE</div> */}
             <button onClick = {getDatabase}>Click me!</button>
         </>
