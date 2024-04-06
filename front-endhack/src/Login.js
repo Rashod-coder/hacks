@@ -20,9 +20,6 @@ function Login() {
     password: ''
   });
 
-  const [registerEmail, setRegisterEmail] = useState("");
-  const [registerPassword, setRegisterPassword] = useState("");
-
   const [loginEmail, setLoginEmail] = useState("");
   const [loginPassword, setLoginPassword] = useState("");
 
@@ -38,6 +35,23 @@ function Login() {
 
     }); 
   }, []);
+
+  const login = async () => {
+    try {
+      const user = await signInWithEmailAndPassword(
+        auth,
+        values.email,
+        values.password
+      );
+      // setLoggedIn(true);
+      // console.log(user);
+      // navigate("/login");
+      console.log(user);
+      navigate("/Home");
+    } catch (error) {
+      console.log("TEST", values.email, values.password);
+    }
+  };
   const googleSignIn = async () => {
     const provider = new GoogleAuthProvider();
     signInWithPopup(auth, provider)
@@ -105,7 +119,7 @@ function Login() {
             required
           />
         </div>
-        <button type="submit">Sign In</button>
+        <button onClick = {login} type="submit">Sign In</button>
         <br/>
         <br/>
         <div>

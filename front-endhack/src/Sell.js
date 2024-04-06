@@ -2,6 +2,9 @@ import { useState } from 'react';
 import { collection, addDoc } from "firebase/firestore"; 
 import { db } from "./Firestore/Firestore";
 import './Sell.css'; // Import your custom CSS file for Sell component styling
+import { Link, useNavigate } from 'react-router-dom';
+import Alert from 'react-bootstrap/Alert';
+import Button from 'react-bootstrap/Button';
 
 function Sell() {
     const [desc, setDesc] = useState("");
@@ -9,19 +12,24 @@ function Sell() {
     const [maxAmt, setMaxAmt] = useState(1);
     const [minAmt, setMinAmt] = useState(0);
     const [type, setType] = useState("");
+
+  const [show, setShow] = useState(true);
+
     // :)
 
     const [street, setStreet] = useState("");
     const [city, setCity] = useState("");
     const [zipcode, setZipcode] = useState("");
     const [image, setImage] = useState("");
-
+    const navigate = useNavigate();
+    const [put, setPut] = useState(false);
     // const [image, setImage] = useState(null);
     const [fileName, setFileName] = useState("No selected file");
     const handleImageChange = (event) => {
         const selectedImage = event.target.files[0]; // Get the first file from the selected files array
         
         setImage(URL.createObjectURL(selectedImage)); // Set the selected image to the image state
+
     }
     const keepDatabase = async () => {
         try {
@@ -36,6 +44,7 @@ function Sell() {
                 Image: image 
             });
             console.log("Document written with ID: ", docRef.id);
+            setPut(true);
         } catch (e) {
             console.error("Error adding document: ", e);
         }
@@ -45,7 +54,19 @@ function Sell() {
         <div className="container-fluid sell-container">
             <div className="row">
              <div className="col-lg-6">
+                {put ?  <Alert variant="success" onClose={() => setShow(false)} dismissible>
+        <Alert.Heading>Product Added!</Alert.Heading>
+        <p>
+          Your product is on the marketplace!
+        </p>
+      </Alert>
+      
+     
+     : <div></div>}
+                {/* {put ? navigate("/Dashboard") : <div></div>} */}
+                {}
                 <form className="sell-form">
+
                         <div className="form-group">
                             <input type="text" className="form-control" placeholder="Type of produce (e.g., Apple)" name="type" onChange={(event) => setType(event.target.value)} />
                         </div>

@@ -4,6 +4,8 @@ import { doc,collection,  getDoc, getDocs, query, where } from "firebase/firesto
 import {db} from "./Firestore/Firestore"
 import Card from 'react-bootstrap/Card';
 import ListGroup from 'react-bootstrap/ListGroup';
+import { Link, useNavigate } from 'react-router-dom';
+
 
 function Buy(){
     //1. extract all the data from the database.
@@ -21,14 +23,15 @@ function Buy(){
         const newPosts = []; // Create a new array to store the updated posts
         setPosts([]);
         querySnapshot.forEach((doc) => {
-            console.log(doc.id);
+            console.log(doc.data());
             newPosts.push({
                 id: doc.id,
                 Type: doc.data()["Type"],
                 maxAmount: doc.data()["maxAmount"],
                 minAmount: doc.data()["minAmount"],
                 Price: doc.data()["Price"],
-                Description: doc.data()["Description"]
+                Description: doc.data()["Description"],
+                Image: doc.data()["Image"]
             });
             console.log("should be done");
         });
@@ -71,7 +74,7 @@ function Buy(){
                         //     {post.id}{' '}   
                         // </li>
                         <Card style={{ width: '18rem' }}>
-                            <Card.Img variant="top" src="holder.js/100px180?text=Image cap" />
+                            <Card.Img variant="top" src={post.Image} />
                             <Card.Body>
                                 <Card.Title>{post.Type}</Card.Title>
                                 <Card.Text>
