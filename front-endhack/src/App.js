@@ -9,8 +9,37 @@ import Sell from "./Sell"
 import Buy from "./Buy"
 import { collection, getDocs, query, where } from "firebase/firestore";
 import { db } from "./Firestore/Firestore";
+import {useState} from "react";
 
 function App() {
+let initPosts = [];
+const [posts, setPosts] = useState(
+   initPosts
+);
+const getDatabase = async () => {
+    const q = query(collection(db, "Orders"));
+    const querySnapshot = await getDocs(q);
+    const newPosts = []; // Create a new array to store the updated posts
+    setPosts([]);
+    querySnapshot.forEach((doc) => {
+        console.log(doc.data());
+        newPosts.push({
+            id: doc.id,
+            Type: doc.data()["Type"],
+            maxAmount: doc.data()["maxAmount"],
+            minAmount: doc.data()["minAmount"],
+            Price: doc.data()["Price"],
+            Description: doc.data()["Description"],
+            Image: doc.data()["Image"]
+        });
+        // console.log("should be done");
+    });
+    
+    setPosts(newPosts); // Update the state with the new array of posts
+    // console.log("Length: ", newPosts.length);
+  };
+
+
   return (
     <div className="App">
      <Router>
@@ -23,6 +52,13 @@ function App() {
           <Route path="/Settings" element={<Settings />} />
           <Route path="/Sell" element={<Sell />} />
           <Route path="/Buy" element={<Buy />} />
+          <Route path="/Buy/:id" element={<div>HERE</div>} />
+          <Route path="*" element={<div>404 not found</div>} />
+          {/* make a path here?? */}
+          {posts.map(post => (
+          <Route path = {"/Buy/"+post.id} element = {<div>HI</div>}></Route>
+                        
+                    ))}
           
           
          

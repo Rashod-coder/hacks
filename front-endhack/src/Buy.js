@@ -36,18 +36,20 @@ function Buy(){
                 Description: doc.data()["Description"],
                 Image: doc.data()["Image"]
             });
-            console.log("should be done");
+            // console.log("should be done");
         });
         
         setPosts(newPosts); // Update the state with the new array of posts
-        console.log("Length: ", newPosts.length);
+        // console.log("Length: ", newPosts.length);
     };
+    const navigate = useNavigate();
 
-    const actuallyBuy = async(id) =>{
-        //
-        console.log()
+    // const actuallyBuy = (id) => {
+    //     navigate("/Buy/"+id);
+    //     //
+    //     // console.log()
         
-    }
+    // }
     // const getDatabase = async() => {
     //     const q = query(collection(db, "Orders"));
     //     const querySnapshot = await getDocs(q);
@@ -74,7 +76,7 @@ function Buy(){
     // }
     return(
         <>
-            <div onReset={getDatabase}>
+            <div>
                 <div></div>
                 <h2>Current Posts</h2>
                 <ul>
@@ -95,7 +97,7 @@ function Buy(){
                             {/* <ListGroup.Item>{post.Description}</ListGroup.Item> */}
                             <ListGroup.Item> Minimum amount of pounds: {post.minAmount}</ListGroup.Item>
                             <ListGroup.Item>Vestibulum at eros</ListGroup.Item>
-                            <Button variant = "dark" onClick = {actuallyBuy(post.id)}>Buy now</Button>
+                            <Button onClick = {() => navigate("/Buy/"+post.id)}>Buy now</Button>
                             </ListGroup>
                         </Card>  
                     ))}
