@@ -13,8 +13,9 @@ function Sell() {
     const [street, setStreet] = useState("");
     const [city, setCity] = useState("");
     const [zipcode, setZipcode] = useState("");
+    const [image, setImage] = useState("");
 
-    const [image, setImage] = useState(null);
+    // const [image, setImage] = useState(null);
     const [fileName, setFileName] = useState("No selected file");
 
     const keepDatabase = async () => {

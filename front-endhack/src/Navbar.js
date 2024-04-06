@@ -2,6 +2,8 @@ import React from 'react';
 import { auth } from './auth/Authentication';
 import { useState, useEffect } from "react";
 import { onAuthStateChanged, signOut } from "firebase/auth";
+import { useNavigate } from 'react-router-dom';
+
 
 function Navbar() {
   const [user, setUser] = useState("");
@@ -25,12 +27,15 @@ function Navbar() {
       }
     });
   }, []);
+  const navigate = useNavigate();
 
   const logout = async () => {
     try {
       await signOut(auth);
       console.log("Signed out");
       setIsUser(false);
+      navigate('/Login')
+      window.alert("You have logged out")
     } catch (error) {
       console.log("error");
     }
