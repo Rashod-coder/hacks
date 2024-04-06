@@ -35,6 +35,29 @@ function Register() {
     } catch (e) {
         console.error("Error adding document: ", e);
     }
+    console.log("hello");
+
+    try {
+      const user = await createUserWithEmailAndPassword(
+        auth,
+        registerEmail,
+        registerPassword
+      );
+      console.log(user.user.uid);
+      try {
+        await signOut(auth);
+        // set
+        console.log("Signed out");
+      } catch (error) {
+        console.log("error")
+      }
+      navigate("/Login");
+    }
+    catch (error) {
+      console.log(error.errorMessage);
+    }
+    
+
 }
   const register = async () => {
     console.log("hello!");
@@ -47,6 +70,7 @@ function Register() {
       console.log("Successful");
       // setLoggedIn(true);
       console.log(user.user.uid);
+      keepDatabase();
 
       try {
         await signOut(auth);
@@ -65,7 +89,7 @@ function Register() {
 
   return (
     <div id = "box"className='wrapper'>
-      <form onSubmit = {handleSubmit}>
+      {/* <form > */}
         <h1>Registration</h1>
         <div className='input-box'>
           <input type="text" placeholder='First Name' name="firstName" onChange={(event) => {
@@ -84,7 +108,7 @@ function Register() {
         </div>
         <div className='input-box'>
           <input type="text" placeholder='Username' name="username" onChange={(event) => {
-            setLastName(event.target.value);
+            setUsername(event.target.value);
           }}/>
         </div>
         <div className='input-box'>
@@ -95,8 +119,8 @@ function Register() {
         <div className='input-box'>
           <a>Already have an account? <Link to="/login">Sign in</Link></a>
         </div>
-        <button id = "submit" type='submit' onClick = {register}>Create Account</button>
-      </form>
+        <button id = "submit" type='submit' onClick = {keepDatabase}>Create Account</button>
+      {/* </form> */}
     </div>
   );
 }
