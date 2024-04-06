@@ -6,7 +6,7 @@ import Login from './Login'
 import Home from './Home'
 import Settings from './Settings'
 import Sell from "./Sell"
-
+import Buy from "./Buy"
 
 function App() {
   return (
@@ -20,6 +20,7 @@ function App() {
           <Route path="/Register" element={<Register />} />
           <Route path="/Settings" element={<Settings />} />
           <Route path="/Sell" element={<Sell />} />
+          <Route path="/Buy" element={<Buy />} />
 
           
          
