@@ -12,19 +12,24 @@ function Navbar({ firstName, lastName }) {
   
   useEffect(() => {
     onAuthStateChanged(auth, (currentUser) => {
-      if (currentUser) {
-        setIsUser(true);
-        setUser(currentUser?.displayName); // Set user's display name
-        if (currentUser.photoURL) {
-          setImage(currentUser.photoURL);
-        } else {
-          setImage("./images/blankpfp.png");
-        }
-      } else {
-        setIsUser(false);
-        setUser("");
-        setImage("./images/blankpfp.png");
+      if(currentUser){
+        // if(currentUser.uid)
+        let uid = currentUser.uid;
+        
       }
+      // if (currentUser) {
+      //   setIsUser(true);
+      //   setUser(currentUser?.displayName); // Set user's display name
+      //   if (currentUser.photoURL) {
+      //     setImage(currentUser.photoURL);
+      //   } else {
+      //     setImage("./images/blankpfp.png");
+      //   }
+      // } else {
+      //   setIsUser(false);
+      //   setUser("");
+      //   setImage("./images/blankpfp.png");
+      // }
     });
   }, []);
   const navigate = useNavigate();
