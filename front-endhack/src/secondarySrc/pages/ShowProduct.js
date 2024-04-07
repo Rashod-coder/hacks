@@ -5,6 +5,7 @@ import { storage } from '../../storage/Storage';
 import { getDownloadURL, ref } from 'firebase/storage';
 import { db } from '../../Firestore/Firestore';
 import './Product.css';
+import { auth } from '../../auth/Authentication';
 // import { PayPalScriptProvider } from "@paypal/react-paypal-js";
 import Checkout from './Checkout';
 import { PayPalScriptProvider } from "@paypal/react-paypal-js";
