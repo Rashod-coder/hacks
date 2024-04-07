@@ -802,6 +802,14 @@ video {
   width: 50%;
 }
 
+.w-1 {
+  width: 0.25rem;
+}
+
+.grow {
+  flex-grow: 1;
+}
+
 .border-spacing-8 {
   --tw-border-spacing-x: 2rem;
   --tw-border-spacing-y: 2rem;
@@ -1073,6 +1081,16 @@ video {
 .text-white {
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity));
+}
+
+.text-gray-700 {
+  --tw-text-opacity: 1;
+  color: rgb(55 65 81 / var(--tw-text-opacity));
+}
+
+.text-green-600 {
+  --tw-text-opacity: 1;
+  color: rgb(22 163 74 / var(--tw-text-opacity));
 }
 
 .shadow-inner {
