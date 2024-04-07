@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 // import './Checkout.css';
-import { PayPalButtons, usePayPalScriptReducer } from "@paypal/react-paypal-js";
+import { PayPalButtons, usePayPalScriptReducer } from '@paypal/react-paypal-js';
 
 const Checkout = () => {
     const [{ options, isPending }, dispatch] = usePayPalScriptReducer();
