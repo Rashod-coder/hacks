@@ -1,9 +1,12 @@
-import {useState} from 'react'
+import {useEffect, useState} from 'react'
 import { doc,collection,  getDoc, getDocs, query, where } from "firebase/firestore";
 
 import {db} from "./Firestore/Firestore"
+import Col from 'react-bootstrap/Col';
+import Row from 'react-bootstrap/Row';
 import Card from 'react-bootstrap/Card';
 import ListGroup from 'react-bootstrap/ListGroup';
+import Button from 'react-bootstrap/Button';
 import { Link, useNavigate } from 'react-router-dom';
 
 
@@ -33,12 +36,20 @@ function Buy(){
                 Description: doc.data()["Description"],
                 Image: doc.data()["Image"]
             });
-            console.log("should be done");
+            // console.log("should be done");
         });
         
         setPosts(newPosts); // Update the state with the new array of posts
-        console.log("Length: ", newPosts.length);
+        // console.log("Length: ", newPosts.length);
     };
+    const navigate = useNavigate();
+
+    // const actuallyBuy = (id) => {
+    //     navigate("/Buy/"+id);
+    //     //
+    //     // console.log()
+        
+    // }
     // const getDatabase = async() => {
     //     const q = query(collection(db, "Orders"));
     //     const querySnapshot = await getDocs(q);
@@ -63,17 +74,22 @@ function Buy(){
     //         console.log("should be done");
     //     });
     // }
+
+    useEffect(() => {
+        getDatabase()
+    }, []);
     return(
         <>
-            <div onLoad = {getDatabase}>
+            <div>
                 <div></div>
                 <h2>Current Posts</h2>
                 <ul>
+                <Row xs={1} md={1} className="g-4">
                     {posts.map(post => (
                         // <li key = {post.id}>
                         //     {post.id}{' '}   
                         // </li>
-                        <Card style={{ width: '18rem' }}>
+                        <Card style={{ width: '18rem' }} >
                             <Card.Img variant="top" src={post.Image} />
                             <Card.Body>
                                 <Card.Title>{post.Type}</Card.Title>
@@ -81,20 +97,22 @@ function Buy(){
                                     ${post.Price} per Pound
                                 </Card.Text>
                             </Card.Body>
-                            <ListGroup className="list-group-flush">
-                            <ListGroup.Item>{post.Description}</ListGroup.Item>
+                            <ListGroup className="list-group-flush center-button">
+                            {/* <ListGroup.Item>{post.Description}</ListGroup.Item> */}
                             <ListGroup.Item> Minimum amount of pounds: {post.minAmount}</ListGroup.Item>
-                            <ListGroup.Item>Vestibulum at eros</ListGroup.Item>
+                            <ListGroup.Item>Total amount of pounds: {post.maxAmount}</ListGroup.Item>
+                            <Button onClick = {() => navigate("/Buy/"+post.id)}>Buy now</Button>
                             </ListGroup>
                         </Card>  
                     ))}
+                    </Row>
                 </ul>
                 <div className="posts-container">
                 
       </div>
     </div>
 
-    <button onClick = {getDatabase}>Click me!</button>
+    {/* <button onClick = {getDatabase}>Click me!</button> */}
     </>
     );
 }

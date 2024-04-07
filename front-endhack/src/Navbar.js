@@ -3,19 +3,62 @@ import { auth } from './auth/Authentication';
 import { useState, useEffect } from "react";
 import { onAuthStateChanged, signOut } from "firebase/auth";
 import { useNavigate } from 'react-router-dom';
+import { collection, getDocs, query, where } from "firebase/firestore";
+import { db } from "./Firestore/Firestore";
 
 
-function Navbar({ firstName, lastName }) {
+ function Navbar () {
   const [user, setUser] = useState("");
   const [image, setImage] = useState("./images/blankpfp.png");
   const [isUser, setIsUser] = useState(false);
-  
+  const getDatabase = async (email) => {
+    console.log(email);
+    const q = query(collection(db, "users"));
+    const querySnapshot = await getDocs(q);
+    querySnapshot.forEach((doc) => {
+      if(doc.data()["email"] === email){
+        console.log(doc.data()["firstName"]);
+        // return doc.data()["firstName"];
+        setUser(doc.data()['firstName']);
+      }
+        // console.log(doc.id);
+        
+        // if(doc.id === uid){
+        //   console.log(doc.id);
+          
+        //   // return doc.data()["firstName"];
+        // }
+        // newPosts.push({
+        //     id: doc.id,
+        //     Type: doc.data()["Type"],
+        //     maxAmount: doc.data()["maxAmount"],
+        //     minAmount: doc.data()["minAmount"],
+        //     Price: doc.data()["Price"],
+        //     Description: doc.data()["Description"],
+        //     Image: doc.data()["Image"]
+        // });
+        // console.log("should be done");
+    });
+    return null;
+  };
   useEffect(() => {
     onAuthStateChanged(auth, (currentUser) => {
       if(currentUser){
+        // currentUser.uid
+        // console.log(currentUser.user.uid)
+        // let uid = currentUser.uid;
+        let email = currentUser.email;
+        getDatabase(email);
+        // let data = getDatabase(uid);
+        // console.log(data);
+
         // if(currentUser.uid)
-        let uid = currentUser.uid;
         
+
+        
+      }
+      else{
+        setUser("");
       }
       // if (currentUser) {
       //   setIsUser(true);
@@ -71,7 +114,7 @@ function Navbar({ firstName, lastName }) {
               </li>
               <li className="nav-item dropdown">
                 <a className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                {firstName && lastName ? `${firstName} ${lastName}` : "Account"} {/* Display firstName and lastName if available, otherwise display "Account" */}
+                {user ? `${user}` : "Account"} {/* Display firstName and lastName if available, otherwise display "Account" */}
                 </a>
                 <ul className="dropdown-menu">
                   {!isUser && (
