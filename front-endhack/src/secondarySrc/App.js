@@ -38,7 +38,7 @@ export default function App() {
     return (
         <>
             <div className={`flex w-screen`}>
-                {Cookies.get('loggedIn') === 'true' && pathname !== '/' && <Navbar setLoggedIn={setLoggedIn}/>}
+                {Cookies.get('loggedIn') === 'true' && pathname !== '/' && pathname !== '/Login' && <Navbar setLoggedIn={setLoggedIn}/>}
                 <Routes>
                     <Route path='/' element={<Home />} />
                     <Route path="/Login" element={<Login setLoggedIn={setLoggedIn} />} />

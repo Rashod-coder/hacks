@@ -40,7 +40,9 @@ export default function Login({ setLoggedIn }) {
         }); 
       }, []);
     
-      const login = async () => {
+      const login = async (e) => {
+        e.preventDefault(); // Prevent default form submission behavior
+
         try {
           const user = await signInWithEmailAndPassword(
             auth,
@@ -63,7 +65,7 @@ export default function Login({ setLoggedIn }) {
           } else {
             console.log("User email does not exist in database");
           }
-          navigate("/");
+          navigate("/Dashboard");
         } catch (error) {
           console.log("TEST", values.email, values.password);
         }

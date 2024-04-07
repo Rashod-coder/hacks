@@ -4,6 +4,8 @@ import {createUserWithEmailAndPassword, signOut} from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
 import { collection, addDoc } from "firebase/firestore"; 
 import { db } from '../../Firestore/Firestore';
+import { Link } from 'react-router-dom';
+
 
 export default function Register() {
     const [registerEmail, setRegisterEmail] = useState("");
@@ -27,7 +29,6 @@ export default function Register() {
                 lastName: lastName,
                 userName: username,
                 email: registerEmail,
-                password: registerPassword
             });
             console.log("Document written with ID: ", docRef.id);
         } catch (e) {
@@ -57,6 +58,44 @@ export default function Register() {
     }
 
     return (
-        <div className={`w-screen`}></div>
+        <div className={`w-screen`}>return (
+            <div id = "box"className='wrapper'>
+              <div className='register-container'>
+                <h1>Registration</h1>
+                <div className='input-box'>
+                  <input type="text" placeholder='First Name' name="firstName" onChange={(event) => {
+                    setFirstName(event.target.value);
+                  }}/>
+                </div>
+                <div className='input-box'>
+                  <input type="text" placeholder='Last Name' name="lastName" onChange={(event) => {
+                    setLastName(event.target.value);
+                  }}/>
+                </div>
+                <div className='input-box'>
+                  <input type="text" placeholder='Email' name="email"  onChange={(event) => {
+                    setRegisterEmail(event.target.value);
+                  }}/>
+                </div>
+                <div className='input-box'>
+                  <input type="text" placeholder='Username' name="username" onChange={(event) => {
+                    setUsername(event.target.value);
+                  }}/>
+                </div>
+                <div className='input-box'>
+                  <input type="password" placeholder='Password' name="password"  onChange={(event) => {
+                    setRegisterPassword(event.target.value);
+                  }}/>
+                </div>
+                <div className='input-box'>
+                  <a>Already have an account? <Link to="/login">Sign in</Link></a>
+                </div>
+                <button id = "submit" type='submit' onClick = {keepDatabase}>Create Account</button>
+              {/* </form> */}
+            </div>
+            </div>
+        
+          );
+        </div>
     )
 }
