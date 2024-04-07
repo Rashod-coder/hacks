@@ -58,7 +58,7 @@ export default function Buy() {
     }, []);
 
     return (
-        <div className={`w-screen`}>
+        <div className={`w-screen px-2 py-3`}>
             <div>
                 <h2 className={`text-center text-5xl font-semibold mb-3`}>Current Posts</h2>
                 <div className={`px-4 flex flex-wrap `}>
