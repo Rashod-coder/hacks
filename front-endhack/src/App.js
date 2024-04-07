@@ -11,7 +11,6 @@ import Buy from "./Buy"
 function App() {
   return (
     <div className="App">
-     <Router>
       <Navbar/>
         <Routes>
           <Route path="/Register" element={<Register />} />
@@ -27,7 +26,6 @@ function App() {
 
 
         </Routes>
-      </Router>
     </div>
   );
 }
