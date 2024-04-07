@@ -101,7 +101,7 @@ export default function ShowProduct() {
                     <p className={`text-xl font-normal mb-3`}>Seller: <span className={`font-semibold cursor-pointer hover:text-gray-600`}>{posts[0].SellerEmail}</span></p>
                     <div className={`w-full mx-auto`}>
                         <PayPalScriptProvider options={initialOptions}>
-                            <Checkout/>
+                            <Checkout price={posts[0].Price} docId={posts[0].id} sellerEmail={posts[0].SellerEmail}/>
                         </PayPalScriptProvider>
                     </div>
                 </div>

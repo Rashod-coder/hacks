@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
 // import './Checkout.css';
 import { PayPalButtons, usePayPalScriptReducer } from '@paypal/react-paypal-js';
+import { doc, updateDoc, getDoc, collection, where, query, getDocs } from 'firebase/firestore';
+import { db } from '../../Firestore/Firestore';
+import { auth } from '../../auth/Authentication';
 
-const Checkout = () => {
+const Checkout = ({ price, docId, sellerEmail }) => {
     const [{ options, isPending }, dispatch] = usePayPalScriptReducer();
     const [currency, setCurrency] = useState(options.currency);
 
@@ -22,7 +25,7 @@ const Checkout = () => {
             purchase_units: [
                 {
                     amount: {
-                        value: "8.99",
+                        value: price,
                     },
                 },
             ],
@@ -31,8 +34,40 @@ const Checkout = () => {
 
     const onApproveOrder = (data,actions) => {
         return actions.order.capture().then((details) => {
+            console.log(details.purchase_units[0].amount.value);
             const name = details.payer.name.given_name;
-            alert(`Transaction completed by ${name}`);
+            const usersDoc = collection(db, "users");
+            const q = query(usersDoc, where("email", "==", auth.currentUser.email));
+            getDocs(q).then(snapshot => {
+                console.log(snapshot.docs);
+                const currentEarnings = snapshot.docs[0]._document.data.value.mapValue.fields.earnings;
+                let newEarnings = currentEarnings ? currentEarnings.doubleValue ? currentEarnings.doubleValue : currentEarnings.integerValue : 0;
+
+                console.log(currentEarnings)
+                if (currentEarnings && (parseFloat(currentEarnings.integerValue) > 0.00 || parseFloat(currentEarnings.doubleValue) > 0.00)) {
+                    console.log(typeof newEarnings, typeof details.purchase_units[0].amount.value);
+                    newEarnings += parseFloat(details.purchase_units[0].amount.value);
+                } else {
+                    newEarnings = parseFloat(details.purchase_units[0].amount.value);
+                }
+
+                const userDocsSnap = query(usersDoc, where("email", "==", sellerEmail));
+                getDocs(userDocsSnap).then(snapshot2 => {
+                    const id = snapshot2.docs[0].id;
+                    const usersDocRef = doc(db, "users", id);
+                    updateDoc(usersDocRef, { earnings: parseFloat(newEarnings) }).then(() => {
+                        alert(`Transaction completed by ${name}`);
+                    });
+                })                
+            });
+            // console.log(auth.currentUser.uid)
+            // getDoc(docRef).then((docSnap) => {
+            //     console.log(docSnap.data())
+            //     alert(`Transaction completed by ${name}`);
+            // }).catch(e => {
+            //     console.error("Error fetching data:", e);
+            //     alert(`Transaction completed by ${name}`);
+            // })
         });
     }
 

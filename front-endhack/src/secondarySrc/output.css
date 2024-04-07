@@ -888,6 +888,10 @@ video {
   border-spacing: var(--tw-border-spacing-x) var(--tw-border-spacing-y);
 }
 
+.origin-top {
+  transform-origin: top;
+}
+
 @keyframes spin {
   to {
     transform: rotate(360deg);
@@ -1038,6 +1042,10 @@ video {
 
 .fill-white {
   fill: #fff;
+}
+
+.object-contain {
+  object-fit: contain;
 }
 
 .object-cover {

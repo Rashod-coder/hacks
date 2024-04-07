@@ -11,6 +11,7 @@ import { ref, uploadBytes } from 'firebase/storage';
 import axios from 'axios';
 import { FaSpinner } from 'react-icons/fa';
 import { FaFileUpload } from "react-icons/fa";
+import { ImSpinner8 } from "react-icons/im";
 
 export default function Sell() {
     // eslint-disable-next-line
@@ -75,6 +76,7 @@ export default function Sell() {
     }
 
     const suggestPrice = async () => {
+        setSuggestingPrice(true);
         const date = new Date();
         const response = await axios.post("http://localhost:5001/predict", { pounds: maxAmt, dayOfWeek: date.toLocaleString('en-us', { weekday: 'long' }), seasonalYield: 10 }, {
             headers: {
@@ -84,6 +86,7 @@ export default function Sell() {
 
         console.log(response.data.prediction);
         setRate(Math.round(response.data.prediction * 100) / 100);
+        setSuggestingPrice(false);
     }
     useEffect(() => {
         onAuthStateChanged(auth, (currentUser) => {
@@ -128,7 +131,7 @@ export default function Sell() {
                             <input value={rate} type="text" className="form-control" placeholder="Rate per pound" name="rate" onChange={(event) => setRate(event.target.value)} required/>
                             {priceFocused && <div className='absolute h-fit w-fit bg-gray-200 shadow-lg -right-56 top-10 rounded-xl px-4 py-4'>
                                 <p className={`text-lg flex flex-row mb-3 items-center font-semibold`}><IoSparkles size={25} className={`mr-3 fill-purple-600`} />Suggest Price                                <IoClose size={25} className={`w-fit ml-2 cursor-pointer hover:fill-gray-700 transition-all duration-200 ease-in-out`} onClick={() => setPriceFocused(false)} /></p>
-                                <button type='button' onClick={suggestPrice} className={`px-2 py-1 rounded-lg bg-green-500 hover:bg-green-400 transition-all duration-200 ease-in-out text-white font-semibold text-lg`} disabled={suggestingPrice}>{suggestingPrice ? 'Suggesting' : 'Suggest'}{suggestingPrice && <FaSpinner className={`animate-spin ml-3`}/>}</button>
+                                <button type='button' onClick={suggestPrice} className={`px-2 py-1 rounded-lg bg-green-500 hover:bg-green-400 transition-all duration-200 ease-in-out text-white font-semibold text-lg flex flex-row items-center justify-center`} disabled={suggestingPrice}>{suggestingPrice ? 'Suggesting' : 'Suggest'}{suggestingPrice && <ImSpinner8 className={`animate-spin ml-3`}/>}</button>
                             </div>}
                         </div>
                         <div className="form-group">

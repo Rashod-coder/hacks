@@ -12,7 +12,7 @@ import {
   signInWithPopup,
 } from "firebase/auth";
 import { auth } from '../../auth/Authentication';
-import { collection, getDocs, query, where } from "firebase/firestore";
+import { collection, doc, getDocs, query, setDoc, where } from "firebase/firestore";
 import { db } from '../../Firestore/Firestore';
 
 export default function Login({ setLoggedIn }) {
@@ -82,10 +82,18 @@ export default function Login({ setLoggedIn }) {
               if (USER != null) setUser(USER);
               // console.log(USER);
             }
-            console.log("Here");
-            console.log(result.user.uid);
-            setLoggedIn(true);
-            navigate('/Dashboard');
+              setDoc(doc(db, "users", result.user.uid), {
+                email: result.user.email,
+                firstName: "",
+                lastName: "",
+                username: result.user.displayName
+              }, { merge: true }).then(() => {
+                console.log("Here");
+                console.log(result.user.uid);
+                setLoggedIn(true);
+                navigate('/Dashboard');
+              });
+            
             // setUser(result.user.uid);
             // The signed-in user info.
             // IdP data available using getAdditionalUserInfo(result)

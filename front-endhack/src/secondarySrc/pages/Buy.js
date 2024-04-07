@@ -69,7 +69,7 @@ export default function Buy() {
                                 <p className={`text-xl font-semibold mb-2`}>{post.Type}</p>
                                 <p className={`text-lg line-clamp-2`}>{post.Description}</p>
                             </div>
-                            <p className={`rounded-b-lg text-3xl font-semibold text-green-600 h-1/6 px-4 pb-5`}>${post.Price}</p>
+                            <p className={`rounded-b-lg text-3xl font-semibold text-green-600 h-1/6 px-4 pb-5`}>${post.Price}/lbs</p>
                         </div>
                     ))}
                 </div>

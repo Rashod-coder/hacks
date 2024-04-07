@@ -2,7 +2,7 @@ import React, { useState } from 'react'; // Import React and useState
 import {auth} from '../../auth/Authentication'
 import {createUserWithEmailAndPassword, signOut} from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
-import { collection, addDoc } from "firebase/firestore"; 
+import { collection, addDoc, doc, setDoc } from "firebase/firestore"; 
 import { db } from '../../Firestore/Firestore';
 import { Link } from 'react-router-dom';
 
@@ -23,17 +23,6 @@ export default function Register() {
 
 
     const keepDatabase = async () => {
-        try {
-            const docRef = await addDoc(collection(db, "users"), {
-                firstName: firstName,
-                lastName: lastName,
-                userName: username,
-                email: registerEmail,
-            });
-            console.log("Document written with ID: ", docRef.id);
-        } catch (e) {
-            console.error("Error adding document: ", e);
-        }
         console.log("hello");
 
         try {
@@ -50,6 +39,17 @@ export default function Register() {
         } catch (error) {
             console.log("error")
         }
+        try {
+          await setDoc(doc(db, "users", user.user.uid), {
+              email: user.user.email,
+              firstName: "",
+              lastName: "",
+              username: user.user.displayName,
+              earnings: 0.0
+            });
+      } catch (e) {
+          console.error("Error adding document: ", e);
+      }
         navigate("/Login");
         }
         catch (error) {
