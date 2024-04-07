@@ -15,12 +15,8 @@ export default function Sell() {
     const [maxAmt, setMaxAmt] = useState(1);
     const [minAmt, setMinAmt] = useState(0);
     const [type, setType] = useState("");
-<<<<<<< HEAD
-    
-=======
     const [priceFocused, setPriceFocused] = useState(false);
     const [suggestingPrice, setSuggestingPrice] = useState(false);
->>>>>>> 1b91bbf705a4755e14f8067ea1adcef695b98dfe
 // eslint-disable-next-line
   const [show, setShow] = useState(true);
 
