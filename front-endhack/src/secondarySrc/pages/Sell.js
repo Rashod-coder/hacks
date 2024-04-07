@@ -125,17 +125,17 @@ export default function Sell() {
                             <input type="text" className="form-control" placeholder="Type of produce (e.g., Apple)" name="type" onChange={(event) => setType(event.target.value)} required />
                         </div>
                         <div className="form-group mb-3" onFocus={() => setPriceFocused(true)}>
-                            <input value={rate} type="text" className="form-control" placeholder="Rate per pound" name="rate" onChange={(event) => setRate(event.target.value)} />
+                            <input value={rate} type="text" className="form-control" placeholder="Rate per pound" name="rate" onChange={(event) => setRate(event.target.value)} required/>
                             {priceFocused && <div className='absolute h-fit w-fit bg-gray-200 shadow-lg -right-56 top-10 rounded-xl px-4 py-4'>
                                 <p className={`text-lg flex flex-row mb-3 items-center font-semibold`}><IoSparkles size={25} className={`mr-3 fill-purple-600`} />Suggest Price                                <IoClose size={25} className={`w-fit ml-2 cursor-pointer hover:fill-gray-700 transition-all duration-200 ease-in-out`} onClick={() => setPriceFocused(false)} /></p>
                                 <button type='button' onClick={suggestPrice} className={`px-2 py-1 rounded-lg bg-green-500 hover:bg-green-400 transition-all duration-200 ease-in-out text-white font-semibold text-lg`} disabled={suggestingPrice}>{suggestingPrice ? 'Suggesting' : 'Suggest'}{suggestingPrice && <FaSpinner className={`animate-spin ml-3`}/>}</button>
                             </div>}
                         </div>
                         <div className="form-group">
-                            <input type="text" className="form-control" placeholder="Amount of produce in stock (e.g., 5 pounds)" name="maxAmt" onChange={(event) => setMaxAmt(event.target.value)} />
+                            <input type="text" className="form-control" placeholder="Amount of produce in stock (e.g., 5 pounds)" name="maxAmt" onChange={(event) => setMaxAmt(event.target.value)} required/>
                         </div>
                         <div className="form-group relative">
-                            <input type="text" className="form-control" placeholder="Minimum amount per purchase" name="minAmt" onChange={(event) => setMinAmt(event.target.value)} />
+                            <input type="text" className="form-control" placeholder="Minimum amount per purchase" name="minAmt" onChange={(event) => setMinAmt(event.target.value)} required/>
                         </div>
                         <div className="form-group mb-3">
                             <input type="text" className="form-control" placeholder="Description of product" name="desc" onChange={(event) => setDesc(event.target.value)} required/>
@@ -157,8 +157,8 @@ export default function Sell() {
                                 type="file"
                                 ref={uploadRef}
                                 className="form-control-file hidden fixed top-0 left-0"
-                                accept="image/*"  // Specify accepted file types
-                                onChange={handleImageChange} // Handle image selection
+                                accept="image/*"  
+                                onChange={handleImageChange} 
                             />
                         </div>
                         <button type="button" className="btn btn-primary btn-block mx-auto" onClick={keepDatabase}>Upload</button>
