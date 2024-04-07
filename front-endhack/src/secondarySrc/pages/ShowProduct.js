@@ -56,7 +56,9 @@ export default function ShowProduct() {
                                     Price: doc.data()["Price"],
                                     Description: doc.data()["Description"],
                                     Image: downloadUrl,
-                                    SellerEmail: doc.data()["sellerEmail"]
+                                    SellerEmail: doc.data()["sellerEmail"],
+                                    Street: doc.data()["Street"],
+                                    City: doc.data()["City"]
                                 });
                             })
                             .catch((error) => {
@@ -97,7 +99,9 @@ export default function ShowProduct() {
                     <h2 className={`text-3xl font-semibold mb-2`}>{posts[0].Type}</h2>
                     <p className={`text-xl font-normal leading-relaxed mb-2`}>{posts[0].Description}</p>
                     <p className={`text-xl font-normal leading-relaxed mb-2 flex`}>Price: <span className={`text-4xl ml-3 text-green-700`}>${posts[0].Price}/lbs</span></p>
-
+                    <p className={`text-xl font-normal leading-relaxed mb-2 flex`}>Min Amount you can purchase: <span className={`text-2xl ml-3 text-black-700`}>{posts[0].minAmount} lbs</span></p>
+                    <p className={`text-xl font-normal leading-relaxed mb-2 flex`}>Stock available: <span className={`text-2xl ml-3 text-black-700`}>{posts[0].maxAmount} lbs</span></p>
+                    <p className={`text-xl font-normal leading-relaxed mb-2 flex`}>Location <span className={`text-2xl ml-3 text-black-700`}>{posts[0].City}, {posts[0].Street} </span></p>
                     <p className={`text-xl font-normal mb-3`}>Seller: <span className={`font-semibold cursor-pointer hover:text-gray-600`}>{posts[0].SellerEmail}</span></p>
                     <div className={`w-full mx-auto`}>
                         <PayPalScriptProvider options={initialOptions}>
