@@ -1,8 +1,10 @@
-import { useState } from 'react';
-import { collection, addDoc } from "firebase/firestore"; 
+import { useState, useEffect } from 'react';
+import { collection, getDocs, query, where, addDoc } from "firebase/firestore";
 import { db } from '../../Firestore/Firestore';
 import { useNavigate } from 'react-router-dom';
 import Alert from 'react-bootstrap/Alert';
+import { auth } from '../../auth/Authentication';
+import { onAuthStateChanged, signOut } from "firebase/auth";
 import { IoSparkles } from "react-icons/io5";
 import axios from 'axios';
 
@@ -23,6 +25,7 @@ export default function Sell() {
   const [show, setShow] = useState(true);
 
     // :)
+    const [user, setUser] = useState("");
 
     const [street, setStreet] = useState("");
     const [city, setCity] = useState("");
@@ -40,6 +43,8 @@ export default function Sell() {
         setImage(URL.createObjectURL(selectedImage)); // Set the selected image to the image state
 
     }
+    
+
     const keepDatabase = async () => {
         try {
             const docRef = await addDoc(collection(db, "Orders"), {
@@ -51,6 +56,7 @@ export default function Sell() {
                 Zipcode: zipcode,
                 Type: type,
                 Image: image, 
+                sellerEmail: user,
                 Description: desc
             });
             console.log("Document written with ID: ", docRef.id);
@@ -59,6 +65,23 @@ export default function Sell() {
             console.error("Error adding document: ", e);
         }
     }
+
+    useEffect(() => {
+        onAuthStateChanged(auth, (currentUser) => {
+          if(currentUser){
+            // currentUser.uid
+            // console.log(currentUser.user.uid)
+            // let uid = currentUser.uid;
+            let email = currentUser.email;
+            setUser(email);
+            console.log("email found", email);
+          }
+          else{
+            setUser("");
+            console.log("not found");
+          }
+        });
+      }, []);
 
     return (
         <div className={'w-screen flex justify-center items-center'}>
