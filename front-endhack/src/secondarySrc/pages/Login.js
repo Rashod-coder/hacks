@@ -3,6 +3,7 @@ import '../../Login.js'
 import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
 import {GoogleButton} from "react-google-button"
+import { FcGoogle } from 'react-icons/fc';
 import {
   onAuthStateChanged,
   createUserWithEmailAndPassword,
@@ -127,9 +128,10 @@ export default function Login({ setLoggedIn }) {
     return (
         <div className="wrapper w-screen"> 
             <form>
-                <h1 id = "signIn">Sign In</h1>
+                <h1 className={`text-4xl font-bold mb-3 text-green-800`}>Sign In</h1>
                 <div className="input-box">
                     <input
+                        className={`px-1 mb-5 py-2 rounded-md focus:outline-none`}
                         type="email"
                         value={values.email} // Use values.email instead of email
                         onChange={e => setValues({...values, email: e.target.value})}
@@ -137,8 +139,10 @@ export default function Login({ setLoggedIn }) {
                         required
                     />
                     </div>
+                    <div className={`py-1`}></div>
                     <div className="input-box">
                     <input
+                        className={`px-1 py-2 rounded-md focus:outline-none`}
                         type="password"
                         value={values.password} // Use values.password instead of password
                         onChange={e => setValues({...values, password: e.target.value})}
@@ -146,14 +150,19 @@ export default function Login({ setLoggedIn }) {
                         required
                     />
                     </div>
-                    <button onClick = {login} type="submit">Sign In</button>
+                    <button onClick={login} type="submit">Sign In</button>
                     <br/>
                     <br/>
                     <div>
-                    <h1 id = "signIn">Or</h1>
-                    <GoogleButton id="googleSignIn" onClick={googleSignIn}/>
+                    <hr className={`border-t-4 w-5/6 border-blue-500 rounded-full my-3 mx-auto`} />
+                    <div className={`w-full mb-2 rounded-lg bg-blue-500 py-1 pl-1 flex flex-row items-center cursor-pointer hover:bg-blue-400`} onClick={googleSignIn}>
+                      <div className={`bg-white rounded-lg p-2 w-fit`}>
+                        <FcGoogle size={30} className={``}/>
+                      </div>
+                      <p className={`ml-auto mr-20 text-white font-semibold`}>Sign in with Google</p>
+                    </div>
                 </div>
-                <a>Don't  have an account? <Link to="/register"> Sign up</Link> </a>
+                <a className={`text-xl text-white mt-3`}>Don't  have an account? <Link to="/register"> Sign up</Link> </a>
 
             </form>
         </div>
