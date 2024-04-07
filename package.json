@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "@paypal/sdk-client": "^4.0.185",
     "bootstrap": "^5.3.3",
     "react-bootstrap": "^2.10.2",
     "react-timer-hook": "^3.0.7"
