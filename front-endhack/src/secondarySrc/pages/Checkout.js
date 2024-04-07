@@ -37,13 +37,13 @@ const Checkout = ({ price, docId, sellerEmail }) => {
             console.log(details.purchase_units[0].amount.value);
             const name = details.payer.name.given_name;
             const usersDoc = collection(db, "users");
-            const q = query(usersDoc, where("email", "==", auth.currentUser.email));
+            const q = query(usersDoc, where("email", "==", sellerEmail));
             getDocs(q).then(snapshot => {
                 console.log(snapshot.docs);
                 const currentEarnings = snapshot.docs[0]._document.data.value.mapValue.fields.earnings;
                 let newEarnings = currentEarnings ? currentEarnings.doubleValue ? currentEarnings.doubleValue : currentEarnings.integerValue : 0;
 
-                console.log(currentEarnings)
+                console.log("CURRENT EARNINGS:", currentEarnings)
                 if (currentEarnings && (parseFloat(currentEarnings.integerValue) > 0.00 || parseFloat(currentEarnings.doubleValue) > 0.00)) {
                     console.log(typeof newEarnings, typeof details.purchase_units[0].amount.value);
                     newEarnings += parseFloat(details.purchase_units[0].amount.value);
@@ -53,6 +53,7 @@ const Checkout = ({ price, docId, sellerEmail }) => {
 
                 const userDocsSnap = query(usersDoc, where("email", "==", sellerEmail));
                 getDocs(userDocsSnap).then(snapshot2 => {
+                    console.log("HELLO");
                     const id = snapshot2.docs[0].id;
                     const usersDocRef = doc(db, "users", id);
                     updateDoc(usersDocRef, { earnings: parseFloat(newEarnings) }).then(() => {

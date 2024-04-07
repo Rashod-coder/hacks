@@ -21,7 +21,7 @@ export default function Navbar({ setLoggedIn }) {
     }
 
     return (
-        <div className={`min-h-screen w-[20%] px-6 py-4 shadow-lg bg-gray-100`}>
+        <div className={`min-h-screen w-[20%] px-6 py-4 shadow-xl bg-gray-100`}>
             <h2 className={`font-bold text-3xl text-black mb-3`}>Fresh for All</h2>
             <hr className={`border-t-2 border-gray-400 rounded-full my-3`} />
             <p className={'text-xl font-semibold text-gray-400 mb-2'}>General</p>
