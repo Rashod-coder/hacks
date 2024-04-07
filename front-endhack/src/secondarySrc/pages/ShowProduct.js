@@ -4,7 +4,6 @@ import { doc, collection, getDocs, query } from 'firebase/firestore';
 import { storage } from '../../storage/Storage';
 import { getDownloadURL, ref } from 'firebase/storage';
 import { db } from '../../Firestore/Firestore';
-import { auth } from '../../auth/Authentication';
 import './Product.css';
 import { auth } from '../../auth/Authentication';
 
