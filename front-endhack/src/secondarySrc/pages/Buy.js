@@ -60,7 +60,7 @@ export default function Buy() {
     return (
         <div className={`w-screen px-2 py-3`}>
             <div>
-                <h2 className={`text-center text-5xl font-semibold mb-3`}>Current Posts</h2>
+                <h2 className={`text-center text-5xl font-semibold mb-3`}>Store</h2>
                 <div className={`px-4 flex flex-wrap `}>
                     {posts.map(post => (
                         <div onClick={() => navigate(`/Buy/${post.id}`, { replace: true })} className={`w-72 rounded-xl mb-4 shadow-md h-96 mr-6 hover:scale-105 transition-all duration-200 ease-in-out cursor-pointer`}>

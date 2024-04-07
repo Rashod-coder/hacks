@@ -154,7 +154,7 @@ export default function Sell() {
                         </div>
                             
                         <div className={`w-full bg-blue-950 rounded-xl hover:bg-blue-900 cursor-pointer flex flex-col justify-center items-center py-8 mb-4`} onClick={() => uploadRef.current.click()}>
-                            {imageName === "" ? <FaFileUpload size={50} className={`mb-2`} fill='white' /> : <img src={image} alt='image-preview' className={`w-72 mb-2 h-auto`} />}
+                            {imageName === "" ? <FaFileUpload size={20} className={`mb-2`} fill='white' /> : <img src={image} alt='image-preview' className={`w-72 mb-2 h-auto`} />}
                             <p className={`text-xl font-semibold text-white`}>{imageName === "" ? 'Add Image' : imageName }</p>
                             <input
                                 type="file"
@@ -166,8 +166,10 @@ export default function Sell() {
                         </div>
                         <button type="button" className="btn btn-primary btn-block mx-auto" onClick={keepDatabase}>Upload</button>
 
+
                     </form>
                 </div>
+                <br/>
             </div>
         </div>
         </div>
