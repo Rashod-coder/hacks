@@ -1,6 +1,8 @@
 import {useLocation} from 'react-router-dom'
 import {useEffect, useState} from 'react';
 import { doc,collection,  getDoc, getDocs, query, where } from "firebase/firestore";
+import { storage } from '../../storage/Storage';
+import { getDownloadURL, ref } from 'firebase/storage';
 import { auth } from '../../auth/Authentication';
 import { onAuthStateChanged, signOut } from "firebase/auth";
 import './Product.css';
@@ -17,33 +19,52 @@ export default function ShowProduct() {
     const [posts, setPosts] = useState(
         initPosts
     );
-    const getDatabase = async () => {
-        
-        
+    const getDatabase = () => {
+        console.log(s);
         const q = query(collection(db, "Orders"));
-        const querySnapshot = await getDocs(q);
-        const newPosts = []; // Create a new array to store the updated posts
-        setPosts([]);
-        querySnapshot.forEach((doc) => {
-            if(doc.id === s){
-                newPosts.push({
-                    id: doc.id,
-                    Type: doc.data()["Type"],
-                    maxAmount: doc.data()["maxAmount"],
-                    minAmount: doc.data()["minAmount"],
-                    Price: doc.data()["Price"],
-                    Description: doc.data()["Description"],
-                    Image: doc.data()["Image"],
-                    SellerEmail: doc.data()["sellerEmail"]
+        getDocs(q)
+            .then((querySnapshot) => {
+                const promises = []; // Array to store promises for download URL
+                const newPosts = []; // Create a new array to store the updated posts
+                setPosts([]);
+                querySnapshot.forEach((doc) => {
+                    if (doc.id === s) {
+                        console.log(doc.data()["Type"]);
+                        const imageRef = ref(storage, `${doc.id}/${doc.data()["Image"]}`);
+                        const downloadPromise = getDownloadURL(imageRef)
+                            .then((downloadUrl) => {
+                                console.log(downloadUrl, "DOWNLOAD URL");
+                                newPosts.push({
+                                    id: doc.id,
+                                    Type: doc.data()["Type"],
+                                    maxAmount: doc.data()["maxAmount"],
+                                    minAmount: doc.data()["minAmount"],
+                                    Price: doc.data()["Price"],
+                                    Description: doc.data()["Description"],
+                                    Image: downloadUrl,
+                                    SellerEmail: doc.data()["sellerEmail"]
+                                });
+                            })
+                            .catch((error) => {
+                                console.error("Error getting download URL:", error);
+                            });
+                        promises.push(downloadPromise);
+                    }
                 });
-            }
-            // console.log("should be done");
-        });
-        
-        setPosts(newPosts); // Update the state with the new array of posts
-        // console.log("Length: ", newPosts.length);
+                Promise.all(promises)
+                    .then(() => {
+                        console.log(newPosts);
+                        setPosts(newPosts); // Update the state with the new array of posts
+                    })
+                    .catch((error) => {
+                        console.error("Error fetching download URLs:", error);
+                    });
+            })
+            .catch((error) => {
+                console.error("Error getting documents:", error);
+            });
     };
-    console.log("HERE", posts[0]);
+    
     // const navigate = useNavigate();
 
     useEffect(() => {
@@ -52,41 +73,22 @@ export default function ShowProduct() {
 
 
     return (
-    
-        <div className="show-product-container">
-            <div className='product-form'>
-            {/* Product Name */}
-            <div className="product-name text-3xl font-bold mb-4">{posts.length > 0 && posts[0].Type}</div>
-    
-            {/* Moved image rendering here */}
-            {posts.length > 0 && posts[0].Image && (
-                <img className="product-image" src={posts[0].Image} alt="Product" />
-            )}
-    
-            <div className="flex flex-row md:flex-row md:w-full"> {/* Changed to flex-col and added md:w-full */}
-                {/* Left column */}
-                <div className="left-column md:w-1/2 md:mr-4"> {/* Half width on medium screens */}
-                    <div className="text-gray-700 mb-2"> {/* Removed md:w-80 */}
-                        {posts.length > 0 && posts[0].SellerEmail && (
-                            <div className="text-green-600 mb-2">Seller: {posts[0].SellerEmail}</div>
-                        )}
-                        {posts.length > 0 && posts[0].Price && (
-                            <div className="text-green-600 mb-2">Price: ${posts[0].Price} per pound</div>
-                        )}
-                    </div>
-                </div>
-    
-                {/* Right column */}
-                <div className="right-column md:w-1/2"> {/* Half width on medium screens */}
-                    {/* Description */}
-                    {posts.length > 0 && posts[0].Description && (
-                        <div>{posts[0].Description}</div>
+        <>
+            { posts.length > 0 && (
+            <div className="w-screen px-16 py-20 flex justify-between">
+                <div className={`w-[48%]`}>
+                    {posts.length > 0 && (
+                        <img src={posts[0].Image} alt={posts[0].Type + " Image"} className={`w-full rounded-xl h-96`} />
                     )}
                 </div>
+                <div className={`w-[48%]`}>
+                    <h2 className={`text-3xl font-semibold mb-2`}>{posts[0].Type}</h2>
+                    <p className={`text-xl font-normal leading-relaxed mb-2`}>{posts[0].Description}</p>
+                    <p className={`text-xl font-normal`}>Seller: <span className={`font-semibold cursor-pointer hover:text-gray-600`}>{auth.currentUser.email}</span></p>
+                </div>
             </div>
-         </div>
-         </div>
-         
+            )}
+         </>
     );
     
 }
