@@ -5,6 +5,7 @@ import { IoLogOut } from "react-icons/io5";
 import { auth } from "../../auth/Authentication";
 import { useNavigate } from 'react-router-dom';
 import Cookies from 'js-cookie';
+import { FaHome } from "react-icons/fa";
 
 export default function Navbar({ setLoggedIn }) {
     const isUser = undefined;
@@ -25,6 +26,7 @@ export default function Navbar({ setLoggedIn }) {
             <hr className={`border-t-2 border-gray-400 rounded-full my-3`} />
             <p className={'text-xl font-semibold text-gray-400 mb-2'}>General</p>
             <div className={`ml-0 mb-3`}>
+            <p onClick={() => navigate('/', { replace: true })} className={`mr-10 w-full rounded-lg cursor-pointer hover:bg-gray-200 transition-all duration-200 ease-in-out font-normal text-xl text-black mb-1 px-3 py-2 flex flex-row items-center`}><FaHome  className={`mr-2`} size={25} />Home</p>
                 <p onClick={() => navigate('/Buy', { replace: true })} className={`mr-10 w-full rounded-lg cursor-pointer hover:bg-gray-200 transition-all duration-200 ease-in-out font-normal text-xl text-black mb-1 px-3 py-2 flex flex-row items-center`}><FaStore className={`mr-2`} size={25} />Store</p>
                 <p onClick={() => navigate('/Dashboard', { replace: true })} className={`mr-10 w-full rounded-lg cursor-pointer hover:bg-gray-200 transition-all duration-200 ease-in-out font-normal text-xl text-black mb-1 px-3 py-2 flex flex-row items-center`}><RiDashboard2Fill className={`mr-2`} size={25} />Dashboard</p>
                 <p onClick={() => navigate('/Sell', { replace: true })} className={`mr-10 w-full rounded-lg cursor-pointer hover:bg-gray-200 transition-all duration-200 ease-in-out font-normal text-xl text-black px-3 py-2 flex flex-row items-center`}><MdSell className={`mr-2`} size={25} />Sell Produce</p>

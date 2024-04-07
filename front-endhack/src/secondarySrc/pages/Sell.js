@@ -71,13 +71,14 @@ export default function Sell() {
      : <div></div>}
                 {/* {put ? navigate("/Dashboard") : <div></div>} */}
                 {}
-                <form className="sell-form mx-auto w-5/12 shadow-lg">
-
-                        <div className="form-group">
-                            <input type="text" className="form-control" placeholder="Type of produce (e.g., Apple)" name="type" onChange={(event) => setType(event.target.value)} />
+                <h1 className="text-3xl">Upload your Products here!</h1>
+                <form className="sell-form mx-auto w-1 shadow-lg" style={{ backgroundColor: '#73b0ff' }} mb-3>
+                        
+                        <div className="form-group mb-3">
+                            <input type="text" className="form-control" placeholder="Type of produce (e.g., Apple)" name="type" onChange={(event) => setType(event.target.value)} required />
                         </div>
-                        <div className="form-group">
-                            <input type="text" className="form-control" placeholder="Rate per pound" name="rate" onChange={(event) => setRate(event.target.value)} />
+                        <div className="form-group mb-3">
+                            <input type="text" className="form-control" placeholder="Rate per pound" name="rate" onChange={(event) => setRate(event.target.value)} required />
                         </div>
                         <div className="form-group">
                             <input type="text" className="form-control" placeholder="Amount of produce in stock (e.g., 5 pounds)" name="maxAmt" onChange={(event) => setMaxAmt(event.target.value)} />
@@ -89,20 +90,20 @@ export default function Sell() {
                                 <button className={`px-2 py-1 rounded-lg bg-green-500 hover:bg-green-400 transition-all duration-200 ease-in-out text-white font-semibold text-lg`}>Suggest</button>
                             </div>}
                         </div>
-                        <div className="form-group">
-                            <input type="text" className="form-control" placeholder="Description of product" name="desc" onChange={(event) => setDesc(event.target.value)} />
+                        <div className="form-group mb-3">
+                            <input type="text" className="form-control" placeholder="Description of product" name="desc" onChange={(event) => setDesc(event.target.value)} required/>
                         </div>
-                        <div className="form-group">
-                            <input type="text" className="form-control" placeholder="Street" name="street" onChange={(event) => setStreet(event.target.value)} />
+                        <div className="form-group mb-3">
+                            <input type="text" className="form-control" placeholder="Street" name="street" onChange={(event) => setStreet(event.target.value)} required />
                         </div>
-                        <div className="form-group">
-                            <input type="text" className="form-control" placeholder="City" name="city" onChange={(event) => setCity(event.target.value)} />
+                        <div className="form-group mb-3">
+                            <input type="text" className="form-control" placeholder="City" name="city" onChange={(event) => setCity(event.target.value)} required />
                         </div>
-                        <div className="form-group">
-                            <input type="text" className="form-control" placeholder="Zipcode" name="zipcode" onChange={(event) => setZipcode(event.target.value)} />
+                        <div className="form-group mb-3">
+                            <input type="text" className="form-control" placeholder="Zipcode" name="zipcode" onChange={(event) => setZipcode(event.target.value)} required />
                         </div>
                             
-                        <div className="form-group">
+                        <div className="form-group mb-3">
                             Upload Image 
                             <input
                                 type="file"
