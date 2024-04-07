@@ -6,6 +6,8 @@ import { getDownloadURL, ref } from 'firebase/storage';
 import { db } from '../../Firestore/Firestore';
 import { auth } from '../../auth/Authentication';
 import './Product.css';
+import { auth } from '../../auth/Authentication';
+
 // import { PayPalScriptProvider } from "@paypal/react-paypal-js";
 import Checkout from './Checkout';
 import { PayPalScriptProvider } from "@paypal/react-paypal-js";
@@ -73,6 +75,8 @@ export default function ShowProduct() {
                 <div className={`w-[48%]`}>
                     <h2 className={`text-3xl font-semibold mb-2`}>{posts[0].Type}</h2>
                     <p className={`text-xl font-normal leading-relaxed mb-2`}>{posts[0].Description}</p>
+                    <p className={`text-xl font-normal leading-relaxed mb-2`}>Price: ${posts[0].Price}/lbs</p>
+
                     <p className={`text-xl font-normal`}>Seller: <span className={`font-semibold cursor-pointer hover:text-gray-600`}>{auth.currentUser.email}</span></p>
                 </div>
                 <PayPalScriptProvider options={initialOptions}>
