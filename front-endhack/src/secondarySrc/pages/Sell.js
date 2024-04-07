@@ -3,6 +3,8 @@ import { collection, addDoc } from "firebase/firestore";
 import { db } from '../../Firestore/Firestore';
 import { useNavigate } from 'react-router-dom';
 import Alert from 'react-bootstrap/Alert';
+import { IoSparkles } from "react-icons/io5";
+import axios from 'axios';
 
 export default function Sell() {
     // eslint-disable-next-line
@@ -11,6 +13,8 @@ export default function Sell() {
     const [maxAmt, setMaxAmt] = useState(1);
     const [minAmt, setMinAmt] = useState(0);
     const [type, setType] = useState("");
+    const [priceFocused, setPriceFocused] = useState(false);
+    const [suggestingPrice, setSuggestingPrice] = useState(false);
 // eslint-disable-next-line
   const [show, setShow] = useState(true);
 
@@ -76,10 +80,14 @@ export default function Sell() {
                             <input type="text" className="form-control" placeholder="Rate per pound" name="rate" onChange={(event) => setRate(event.target.value)} />
                         </div>
                         <div className="form-group">
-                            <input type="text" className="form-control" placeholder="Amount of produce (e.g., 5 pounds)" name="maxAmt" onChange={(event) => setMaxAmt(event.target.value)} />
+                            <input type="text" className="form-control" placeholder="Amount of produce in stock (e.g., 5 pounds)" name="maxAmt" onChange={(event) => setMaxAmt(event.target.value)} />
                         </div>
-                        <div className="form-group">
-                            <input type="text" className="form-control" placeholder="Minimum amount per purchase" name="minAmt" onChange={(event) => setMinAmt(event.target.value)} />
+                        <div className="form-group relative">
+                            <input type="text" onFocus={() => setPriceFocused(true)} onBlur={() => setPriceFocused(false)} className="form-control" placeholder="Minimum amount per purchase" name="minAmt" onChange={(event) => setMinAmt(event.target.value)} />
+                            {priceFocused && <div className='absolute h-fit w-fit bg-gray-200 shadow-lg -right-56 -top-10 rounded-xl px-4 py-4'>
+                                <p className={`text-lg flex flex-row mb-3 items-center font-semibold`}><IoSparkles size={25} className={`mr-3 fill-purple-600`} />Suggest Price</p>
+                                <button className={`px-2 py-1 rounded-lg bg-green-500 hover:bg-green-400 transition-all duration-200 ease-in-out text-white font-semibold text-lg`}>Suggest</button>
+                            </div>}
                         </div>
                         <div className="form-group">
                             <input type="text" className="form-control" placeholder="Description of product" name="desc" onChange={(event) => setDesc(event.target.value)} />
