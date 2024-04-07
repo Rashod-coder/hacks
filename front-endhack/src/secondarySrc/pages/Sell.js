@@ -96,7 +96,7 @@ export default function Sell() {
                 {/* {put ? navigate("/Dashboard") : <div></div>} */}
                 {}
                 <h1 className="text-3xl">Upload your Products here!</h1>
-                 <form className="sell-form mx-auto w-1 shadow-lg" style={{ backgroundColor: '#73b0ff' }} mb-3>
+                 <form className="sell-form mx-auto w-3/6 shadow-lg" style={{ backgroundColor: '#73b0ff' }} mb-3>
                         
                         <div className="form-group mb-3">
                             <input type="text" className="form-control" placeholder="Type of produce (e.g., Apple)" name="type" onChange={(event) => setType(event.target.value)} required />

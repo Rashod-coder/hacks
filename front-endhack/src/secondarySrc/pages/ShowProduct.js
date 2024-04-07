@@ -3,6 +3,8 @@ import {useEffect, useState} from 'react';
 import { doc,collection,  getDoc, getDocs, query, where } from "firebase/firestore";
 import { auth } from '../../auth/Authentication';
 import { onAuthStateChanged, signOut } from "firebase/auth";
+import './Product.css';
+
 
 
 import {db} from '../../Firestore/Firestore';
@@ -50,39 +52,41 @@ export default function ShowProduct() {
 
 
     return (
-        // <div>
-        // {posts.length > 0 && posts[0].Type ? <div>{posts[0].Type}</div> : <div></div>}
-        // {posts.length > 0 && posts[0].Description ? <div>{posts[0].Description}</div> : <div></div>}
-        // {posts.length > 0 && posts[0].Price ? <div>${posts[0].Price} per pound</div> : <div></div>}
-        // {posts.length > 0 && posts[0].Image ? <img variant="top" src={posts[0].Image} /> : <div></div> } 
-        //     {/* <div>{posts[0].Description}</div> */}
-        //     {/* <div>{posts[0]}</div> */}
-        //     {/* <div>{posts[0].maxAmount}</div>
-        //     <div>{posts[0].minAmount}</div>
-        //     <div>{posts[0].Price}</div>
-        //     <div>{posts[0].Image}</div> */}
-        // </div>
-        <div>
-    {posts.length > 0 && posts[0].Type && (
-        <div className="text-xl font-bold mb-2">{posts[0].Type}</div>
-    )}
-
-    {posts.length > 0 && posts[0].Description && (
-        <div className="text-gray-700 mb-2">{posts[0].Description}</div>
-    )}
-
-    {posts.length > 0 && posts[0].Price && (
-        <div className="text-green-600 mb-2">${posts[0].Price} per pound</div>
-    )}
-
-    {posts.length > 0 && posts[0].Image && (
-        <img className="w-full" src={posts[0].Image} alt="Product" />
-    )}
-
-    {posts.length > 0 && posts[0].SellerEmail && (
-        <div className="text-green-600 mb-2">Poster: {posts[0].SellerEmail}</div>
-    )}
-</div>
-        
+    
+        <div className="show-product-container">
+            <div className='product-form'>
+            {/* Product Name */}
+            <div className="product-name text-3xl font-bold mb-4">{posts.length > 0 && posts[0].Type}</div>
+    
+            {/* Moved image rendering here */}
+            {posts.length > 0 && posts[0].Image && (
+                <img className="product-image" src={posts[0].Image} alt="Product" />
+            )}
+    
+            <div className="flex flex-row md:flex-row md:w-full"> {/* Changed to flex-col and added md:w-full */}
+                {/* Left column */}
+                <div className="left-column md:w-1/2 md:mr-4"> {/* Half width on medium screens */}
+                    <div className="text-gray-700 mb-2"> {/* Removed md:w-80 */}
+                        {posts.length > 0 && posts[0].SellerEmail && (
+                            <div className="text-green-600 mb-2">Seller: {posts[0].SellerEmail}</div>
+                        )}
+                        {posts.length > 0 && posts[0].Price && (
+                            <div className="text-green-600 mb-2">Price: ${posts[0].Price} per pound</div>
+                        )}
+                    </div>
+                </div>
+    
+                {/* Right column */}
+                <div className="right-column md:w-1/2"> {/* Half width on medium screens */}
+                    {/* Description */}
+                    {posts.length > 0 && posts[0].Description && (
+                        <div>{posts[0].Description}</div>
+                    )}
+                </div>
+            </div>
+         </div>
+         </div>
+         
     );
+    
 }

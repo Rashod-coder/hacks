@@ -34,7 +34,7 @@ export default function Home() {
                         <p className={`mr-10 font-bold text-xl text-white`}>Home</p>
                         <p className={`mr-10 font-bold text-xl text-white`}>Features</p>
                         <p className={`mr-10 font-bold text-xl text-white`}>Our Mission</p>
-                        <p className={`font-bold text-xl text-white`}>Contact</p>
+                        <p className={`mr-10 font-bold text-xl text-white`}>Contact</p>
                     </div>
                     {!auth.currentUser ? (
                         <div className={`flex flex-row items-center`}>
