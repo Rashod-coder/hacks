@@ -47,7 +47,7 @@ export default function Home() {
                 </div>
                 <div className={`h-[86%] z-50 flex justify-center items-center`}>
                     <div className='w-full'>
-                        <h1 className={`text-3xl sm:text-7xl sm:w-4/6 sm:mx-auto px-5 font-semibold text-white`}>Produce, fresh from the farm for everyone.</h1>
+                        <h1 className={`text-3xl sm:text-7xl sm:w-4/6 sm:mx-auto px-5 font-semibold text-white`}>Produce, fresh from the garden/farm locally grown for everyone.</h1>
                         <p></p>
                     </div>
                 </div>
@@ -101,7 +101,7 @@ export default function Home() {
             </div>
             <div className={`h-fit w-screen bg-gray-800 px-20 py-10`}>
                 <h2 className={`text-4xl font-semibold mb-4 text-white`}>Our Mission</h2>
-                <p className={`text-2xl text-white leading-relaxed font-normal`}>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Volutpat ac tincidunt vitae semper quis lectus nulla. Etiam erat velit scelerisque in dictum non consectetur. Purus non enim praesent elementum. Semper quis lectus nulla at. Id eu nisl nunc mi ipsum faucibus vitae aliquet. Orci dapibus ultrices in iaculis. Netus et malesuada fames ac turpis egestas maecenas pharetra convallis. Tortor id aliquet lectus proin nibh nisl condimentum. In ornare quam viverra orci sagittis. Faucibus scelerisque eleifend donec pretium vulputate sapien nec. Eget nunc scelerisque viverra mauris in.</p>
+                <p className={`text-2xl text-white leading-relaxed font-normal`}>Our Mission is to provide Fresh Produce for all. We notice that many people grow produce in their garden however many of these go to waste or end up the ground, so we implemented Fresh For All where people can upload their produce online and people </p>
             </div>
             <div className={`h-fit w-screen bg-white px-20 py-10`}>
                 <h2 className={`text-4xl font-semibold mb-4 text-black`}>Contact</h2>
