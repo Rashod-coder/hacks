@@ -33,31 +33,53 @@ export default function ShowProduct() {
     const [scriptLoaded, setScriptLoaded] = useState(false);
 
     
-    const getDatabase = async () => {
-        const q = query(collection(db, 'Orders'));
-        const querySnapshot = await getDocs(q);
-        const newPosts = [];
+    const getDatabase = () => {
+        console.log(s);
+        const q = query(collection(db, "Orders"));
+        getDocs(q)
+            .then((querySnapshot) => {
+                const promises = []; // Array to store promises for download URL
+                const newPosts = []; // Create a new array to store the updated posts
+                setPosts([]);
+                querySnapshot.forEach((doc) => {
+                    if (doc.id === s) {
+                        console.log(doc.data()["Type"]);
+                        const imageRef = ref(storage, `${doc.id}/${doc.data()["Image"]}`);
+                        const downloadPromise = getDownloadURL(imageRef)
+                            .then((downloadUrl) => {
+                                console.log(downloadUrl, "DOWNLOAD URL");
+                                newPosts.push({
+                                    id: doc.id,
+                                    Type: doc.data()["Type"],
+                                    maxAmount: doc.data()["maxAmount"],
+                                    minAmount: doc.data()["minAmount"],
+                                    Price: doc.data()["Price"],
+                                    Description: doc.data()["Description"],
+                                    Image: downloadUrl,
+                                    SellerEmail: doc.data()["sellerEmail"]
+                                });
+                            })
+                            .catch((error) => {
+                                console.error("Error getting download URL:", error);
+                            });
 
-        querySnapshot.forEach((doc) => {
-            if (doc.id === s) {
-                newPosts.push({
-                    id: doc.id,
-                    Type: doc.data()['Type'],
-                    maxAmount: doc.data()['maxAmount'],
-                    minAmount: doc.data()['minAmount'],
-                    Price: doc.data()['Price'],
-                    Description: doc.data()['Description'],
-                    Image: doc.data()['Image'],
-                    SellerEmail: doc.data()['sellerEmail'],
+                        promises.push(downloadPromise);
+                    }
                 });
-            }
-        });
-
-        setPosts(newPosts);
+                Promise.all(promises)
+                    .then(() => {
+                        console.log(newPosts);
+                        setPosts(newPosts); // Update the state with the new array of posts
+                    })
+                    .catch((error) => {
+                        console.error("Error fetching download URLs:", error);
+                    });
+            })
+            .catch((error) => {
+                console.error("Error getting documents:", error);
+            });
     };
-    console.log("HERE", posts[0]);
-    // const navigate = useNavigate();
-
+    
     useEffect(() => {
         getDatabase();
     }, []);
@@ -68,19 +90,21 @@ export default function ShowProduct() {
             <div className="w-screen px-16 py-20 flex justify-between">
                 <div className={`w-[48%]`}>
                     {posts.length > 0 && (
-                        <img src={posts[0].Image} alt={posts[0].Type + " Image"} className={`w-full rounded-xl h-96`} />
+                        <img src={posts[0].Image} alt={posts[0].Type + " Image"} className={`w-full rounded-xl h-96 shadow-lg`} />
                     )}
                 </div>
                 <div className={`w-[48%]`}>
                     <h2 className={`text-3xl font-semibold mb-2`}>{posts[0].Type}</h2>
                     <p className={`text-xl font-normal leading-relaxed mb-2`}>{posts[0].Description}</p>
-                    <p className={`text-xl font-normal leading-relaxed mb-2`}>Price: ${posts[0].Price}/lbs</p>
+                    <p className={`text-xl font-normal leading-relaxed mb-2 flex`}>Price: <span className={`text-4xl ml-3 text-green-700`}>${posts[0].Price}/lbs</span></p>
 
-                    <p className={`text-xl font-normal`}>Seller: <span className={`font-semibold cursor-pointer hover:text-gray-600`}>{auth.currentUser.email}</span></p>
+                    <p className={`text-xl font-normal mb-3`}>Seller: <span className={`font-semibold cursor-pointer hover:text-gray-600`}>{posts[0].SellerEmail}</span></p>
+                    <div className={`w-full mx-auto`}>
+                        <PayPalScriptProvider options={initialOptions}>
+                            <Checkout/>
+                        </PayPalScriptProvider>
+                    </div>
                 </div>
-                <PayPalScriptProvider options={initialOptions}>
-                    <Checkout/>
-                </PayPalScriptProvider>
             </div>
             )}
          </>

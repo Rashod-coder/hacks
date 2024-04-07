@@ -60,17 +60,19 @@ export default function Buy() {
     return (
         <div className={`w-screen`}>
             <div>
-                <div></div>
-                <h2>Current Posts</h2>
-                <ul>
-                <Row xs={1} md={1} className="g-4">
+                <h2 className={`text-center text-5xl font-semibold mb-3`}>Current Posts</h2>
+                <div className={`px-4 flex flex-wrap `}>
                     {posts.map(post => (
-                        <div className={`w-52`}>
-                            <img src={post.Image} />
+                        <div onClick={() => navigate(`/Buy/${post.id}`, { replace: true })} className={`w-72 rounded-xl shadow-md h-96 mr-6 hover:scale-105 transition-all duration-200 ease-in-out cursor-pointer`}>
+                            <img src={post.Image} className={`w-full shadow-inner rounded-t-xl h-3/6`} />
+                            <div className={`bg-white h-2/6 px-4 py-3`}>
+                                <p className={`text-xl font-semibold mb-2`}>{post.Type}</p>
+                                <p className={`text-lg line-clamp-2`}>{post.Description}</p>
+                            </div>
+                            <p className={`rounded-b-lg text-3xl font-semibold text-green-600 h-1/6 px-4 pb-5`}>${post.Price}</p>
                         </div>
                     ))}
-                    </Row>
-                </ul>
+                </div>
                 <div className="posts-container">
                 
       </div>
