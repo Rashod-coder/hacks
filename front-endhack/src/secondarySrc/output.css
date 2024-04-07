@@ -939,6 +939,18 @@ video {
   width: 32.5%;
 }
 
+.w-\[32\.5\] {
+  width: 32.5;
+}
+
+.w-\[65\%\] {
+  width: 65%;
+}
+
+.w-\[24\%\] {
+  width: 24%;
+}
+
 .grow {
   flex-grow: 1;
 }
@@ -1024,6 +1036,10 @@ video {
 
 .border-2 {
   border-width: 2px;
+}
+
+.border-4 {
+  border-width: 4px;
 }
 
 .border-b-2 {
@@ -1230,6 +1246,10 @@ video {
 
 .pb-5 {
   padding-bottom: 1.25rem;
+}
+
+.pt-6 {
+  padding-top: 1.5rem;
 }
 
 .text-center {
