@@ -78,7 +78,7 @@ function Buy(){
         <>
             <div>
                 <div></div>
-                <h2>Current Posts</h2>
+                <h2>Current Posts <br/> </h2>
                 <ul>
                 <Row xs={1} md={1} className="g-4">
                     {posts.map(post => (

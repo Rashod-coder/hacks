@@ -104,7 +104,7 @@ import { db } from "./Firestore/Firestore";
           <div className="offcanvas-body">
             <ul className="navbar-nav justify-content-end flex-grow-1 pe-3">
               <li className="nav-item">
-                <a className="nav-link active" aria-current="page" href="/Store">Store</a>
+                <a className="nav-link active" aria-current="page" href="/Buy">Store</a>
               </li>
               <li className="nav-item">
                 <a className="nav-link" href="/Dashboard">Dashboard</a>
@@ -117,13 +117,13 @@ import { db } from "./Firestore/Firestore";
                 {user ? `${user}` : "Account"} {/* Display firstName and lastName if available, otherwise display "Account" */}
                 </a>
                 <ul className="dropdown-menu">
-                  {!isUser && (
+                  
                     <React.Fragment>
                       <li><a className="dropdown-item" href="/Login">Login</a></li>
                       <li><a className="dropdown-item" href="/Register">Register</a></li>
                     </React.Fragment>
-                  )}
-                  {isUser && <li><a className="dropdown-item" href="/Settings">Settings</a></li>}
+                 
+                 <li><a className="dropdown-item" href="/Settings">Settings</a></li>
                   <hr className="dropdown-divider"/>
                   <li><a className="dropdown-item" onClick={logout}>Logout</a></li>
                 </ul>

@@ -55,10 +55,6 @@ const getDatabase = async () => {
           <Route path="/Buy/:id" element={<div>HERE</div>} />
           <Route path="*" element={<div>404 not found</div>} />
           {/* make a path here?? */}
-          {posts.map(post => (
-          <Route path = {"/Buy/"+post.id} element = {<div>HI</div>}></Route>
-                        
-                    ))}
           
           
          
