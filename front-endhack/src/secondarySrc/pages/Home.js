@@ -58,8 +58,8 @@ export default function Home() {
                     <div className={`shadow-lg bg-white rounded-xl w-[32%] mb-4`}>
                         <div className={`bg-gray-200 h-48 rounded-t-xl`}></div>
                         <div className={`h-36 bg-white shadow-inner rounded-b-xl px-4 py-3`}>
-                            <p className={`text-xl font-semibold mb-1`}>Feature 1</p>
-                            <p className={`text-md`}>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Iaculis nunc sed augue lacus viverra.</p>
+                            <p className={`text-xl font-semibold mb-1`}>ML Trained Model </p>
+                            <p className={`text-md`}>Our trained ML model will suggest an accurate price of the product, based on the current Economy,  you are currently trying to sell</p>
                         </div>
                     </div>
                     <div className={`shadow-lg bg-white rounded-xl w-[32%] mb-4`}>
@@ -105,6 +105,8 @@ export default function Home() {
             </div>
             <div className={`h-fit w-screen bg-white px-20 py-10`}>
                 <h2 className={`text-4xl font-semibold mb-4 text-black`}>Contact</h2>
+                <h3>Instagram</h3>
+                <h3>Download our App for Mobiles</h3>
                 <div className={`w-2/6 mx-auto`}>  
                     <div className={`w-full flex justify-between mb-3`}>
                         <input className={`px-3 w-[49%] py-1 text-lg border-b-2 focus:outline-none border-gray-400 focus:border-purple-600`} placeholder='Enter your name'/>

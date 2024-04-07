@@ -45,7 +45,7 @@ export default function Buy() {
     }, []);
 
     return (
-        <div className={`w-screen`}>
+<div style={{ backgroundColor: '#353b45' }} className={`w-screen`}>
             <div>
                 <div></div>
                 <h2>Current Posts</h2>

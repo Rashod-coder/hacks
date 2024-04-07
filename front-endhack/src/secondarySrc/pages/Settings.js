@@ -1,6 +1,9 @@
-
-
 import '../../Settings.css'; // Import the CSS file
+
+
+
+
+
 
 function Settings() {
     return (
