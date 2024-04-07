@@ -5,12 +5,13 @@ import { useNavigate } from 'react-router-dom';
 import Alert from 'react-bootstrap/Alert';
 
 export default function Sell() {
+    // eslint-disable-next-line
     const [desc, setDesc] = useState("");
     const [rate, setRate] = useState(0.01);
     const [maxAmt, setMaxAmt] = useState(1);
     const [minAmt, setMinAmt] = useState(0);
     const [type, setType] = useState("");
-
+// eslint-disable-next-line
   const [show, setShow] = useState(true);
 
     // :)
@@ -19,9 +20,11 @@ export default function Sell() {
     const [city, setCity] = useState("");
     const [zipcode, setZipcode] = useState("");
     const [image, setImage] = useState("");
+    // eslint-disable-next-line
     const navigate = useNavigate();
     const [put, setPut] = useState(false);
     // const [image, setImage] = useState(null);
+    // eslint-disable-next-line
     const [fileName, setFileName] = useState("No selected file");
     const handleImageChange = (event) => {
         const selectedImage = event.target.files[0]; // Get the first file from the selected files array
@@ -49,10 +52,10 @@ export default function Sell() {
     }
 
     return (
-        <div className={'w-screen'}>
+        <div className={'w-screen flex justify-center items-center'}>
             <div className="container-fluid sell-container">
             <div className="row">
-             <div className="col-lg-6">
+             <div className="">
                 {put ?  <Alert variant="success" onClose={() => setShow(false)} dismissible>
         <Alert.Heading>Product Added!</Alert.Heading>
         <p>
@@ -64,7 +67,7 @@ export default function Sell() {
      : <div></div>}
                 {/* {put ? navigate("/Dashboard") : <div></div>} */}
                 {}
-                <form className="sell-form">
+                <form className="sell-form mx-auto w-5/12 shadow-lg">
 
                         <div className="form-group">
                             <input type="text" className="form-control" placeholder="Type of produce (e.g., Apple)" name="type" onChange={(event) => setType(event.target.value)} />

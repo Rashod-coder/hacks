@@ -58,7 +58,7 @@ export default function Register() {
     }
 
     return (
-        <div className={`w-screen`}>return (
+        <div className={`w-screen`}>
             <div id = "box"className='wrapper'>
               <div className='register-container'>
                 <h1>Registration</h1>
