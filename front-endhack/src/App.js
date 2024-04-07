@@ -51,7 +51,7 @@ const getDatabase = async () => {
           <Route path="/Settings" element={<Settings />} />
           <Route path="/Sell" element={<Sell />} />
           <Route path="/Buy" element={<Buy />} />
-          <Route path="/Buy/:id" element={<ShowProduct></ShowProduct>} />
+          <Route path="/Buy/:id" element={<ShowProduct />} />
           <Route path="*" element={<div>404 not found</div>} />
           {/* make a path here?? */}
           

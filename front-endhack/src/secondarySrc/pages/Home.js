@@ -27,10 +27,10 @@ export default function Home() {
                         <p className={`font-bold text-lg text-white`}>Contact</p>
                     </div>
                     {!auth.currentUser ? <div className={`flex flex-row items-center`}>
-                        <button onClick={() => navigate('/Login')} className={`px-3 mr-5 py-1 rounded-lg border-purple-700 border-2 border-spacing-8 hover:bg-purple-600 hover:border-purple-600 transition-all duration-200 ease-in-out text-lg text-white font-semibold`}>Sign In</button>
+                        <button onClick={() => navigate('/Login')} className={`px-3 mr-10 py-1 rounded-lg bg-purple-700 border-purple-700 border-2 border-spacing-8 hover:bg-purple-600 hover:border-purple-600 transition-all duration-200 ease-in-out text-lg text-white font-semibold`}>Sign In</button>
                         <button className={`px-3 py-1 rounded-lg bg-purple-700 border-2 border-purple-700 hover:bg-purple-600 hover:border-purple-600 transition-all duration-200 ease-in-out text-lg text-white font-semibold`}>Register</button>
                     </div> : <div>
-                        <button className={`px-3 py-1 rounded-lg border-purple-700 border-2 border-spacing-8 hover:bg-purple-600 hover:border-purple-600 transition-all duration-200 ease-in-out text-lg text-white font-semibold`}>Dashboard</button>
+                        <button onClick={() => navigate('/Dashboard')} className={` w-fit px-3 py-1 rounded-lg border-purple-700 bg-purple-700 mr-5 border-2 border-spacing-8 hover:bg-purple-600 hover:border-purple-600 transition-all duration-200 ease-in-out text-lg text-white font-semibold`}>Dashboard</button>
                     </div>}
                 </div>
                 <div className={`h-5/6 z-50`}></div>
