@@ -42,7 +42,6 @@ const getDatabase = async () => {
 
   return (
     <div className="App">
-     <Router>
       <Navbar/>
         <Routes>
           <Route path="/Register" element={<Register />} />
@@ -52,7 +51,7 @@ const getDatabase = async () => {
           <Route path="/Settings" element={<Settings />} />
           <Route path="/Sell" element={<Sell />} />
           <Route path="/Buy" element={<Buy />} />
-          <Route path="/Buy/:id" element={<ShowProduct></ShowProduct>} />
+          <Route path="/Buy/:id" element={<ShowProduct />} />
           <Route path="*" element={<div>404 not found</div>} />
           {/* make a path here?? */}
 <<<<<<< HEAD
@@ -65,7 +64,6 @@ const getDatabase = async () => {
 
 
         </Routes>
-      </Router>
     </div>
   );
 }

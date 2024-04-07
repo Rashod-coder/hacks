@@ -1,13 +1,12 @@
 /* Settings.css */
 
 .settings-container {
-  background-image: url('splash85.jpg');
+  /* background-image: url('splash85.jpg'); */
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat; /* Ensure the background image doesn't repeat */
   color: #fff; /* Text color is white for better contrast */
   padding: 40px;
-  border-radius: 8px;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.3); /* Improved box shadow for depth */
   display: flex;
   flex-direction: column;
