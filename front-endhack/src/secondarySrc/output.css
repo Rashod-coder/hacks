@@ -774,6 +774,10 @@ video {
   width: 100vw;
 }
 
+.w-1 {
+  width: 0.25rem;
+}
+
 .border-spacing-8 {
   --tw-border-spacing-x: 2rem;
   --tw-border-spacing-y: 2rem;
