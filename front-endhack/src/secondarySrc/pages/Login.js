@@ -144,7 +144,6 @@ export default function Login({ setLoggedIn }) {
                     <div>
                     <h1 id = "signIn">Or</h1>
                     <GoogleButton id="googleSignIn" onClick={googleSignIn}/>
-                    <div>HI {user}</div>
                 </div>
                 <a>Don't  have an account? <Link to="/register"> Sign up</Link> </a>
 
