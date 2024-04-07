@@ -1,4 +1,4 @@
-import {useState} from 'react'
+import {useEffect, useState} from 'react'
 import { doc,collection,  getDoc, getDocs, query, where } from "firebase/firestore";
 
 import {db} from "./Firestore/Firestore"
@@ -74,6 +74,10 @@ function Buy(){
     //         console.log("should be done");
     //     });
     // }
+
+    useEffect(() => {
+        getDatabase()
+    }, []);
     return(
         <>
             <div>
@@ -96,7 +100,7 @@ function Buy(){
                             <ListGroup className="list-group-flush center-button">
                             {/* <ListGroup.Item>{post.Description}</ListGroup.Item> */}
                             <ListGroup.Item> Minimum amount of pounds: {post.minAmount}</ListGroup.Item>
-                            <ListGroup.Item>Vestibulum at eros</ListGroup.Item>
+                            <ListGroup.Item>Total amount of pounds: {post.maxAmount}</ListGroup.Item>
                             <Button onClick = {() => navigate("/Buy/"+post.id)}>Buy now</Button>
                             </ListGroup>
                         </Card>  
@@ -108,7 +112,7 @@ function Buy(){
       </div>
     </div>
 
-    <button onClick = {getDatabase}>Click me!</button>
+    {/* <button onClick = {getDatabase}>Click me!</button> */}
     </>
     );
 }

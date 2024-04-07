@@ -10,7 +10,7 @@ import Buy from "./Buy"
 import { collection, getDocs, query, where } from "firebase/firestore";
 import { db } from "./Firestore/Firestore";
 import {useState} from "react";
-
+import ShowProduct from "./showProduct";
 function App() {
 let initPosts = [];
 const [posts, setPosts] = useState(
@@ -52,13 +52,10 @@ const getDatabase = async () => {
           <Route path="/Settings" element={<Settings />} />
           <Route path="/Sell" element={<Sell />} />
           <Route path="/Buy" element={<Buy />} />
-          <Route path="/Buy/:id" element={<div>HERE</div>} />
+          <Route path="/Buy/:id" element={<ShowProduct></ShowProduct>} />
           <Route path="*" element={<div>404 not found</div>} />
           {/* make a path here?? */}
-          {posts.map(post => (
-          <Route path = {"/Buy/"+post.id} element = {<div>HI</div>}></Route>
-                        
-                    ))}
+          
           
           
          
