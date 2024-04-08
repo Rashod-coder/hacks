@@ -5,7 +5,7 @@ import { doc, updateDoc, getDoc, collection, where, query, getDocs } from 'fireb
 import { db } from '../../Firestore/Firestore';
 import { auth } from '../../auth/Authentication';
 
-const Checkout = ({ price, docId, sellerEmail }) => {
+const Checkout = ({ price, docId, sellerEmail, data }) => {
     const [{ options, isPending }, dispatch] = usePayPalScriptReducer();
     const [currency, setCurrency] = useState(options.currency);
 
@@ -40,10 +40,12 @@ const Checkout = ({ price, docId, sellerEmail }) => {
             const q = query(usersDoc, where("email", "==", sellerEmail));
             getDocs(q).then(snapshot => {
                 console.log(snapshot.docs);
-                const currentEarnings = snapshot.docs[0]._document.data.value.mapValue.fields.earnings;
-                const currentSales = snapshot.docs[0]._document.data.value.mapValue.fields.sales;
+                const currentEarnings = snapshot.docs[0].get()["earnings"];
+                const currentSales = snapshot.docs[0].get()["sales"];
+                const currentSaleHistory = snapshot.docs[0].get()["saleHistory"];
                 let newEarnings = currentEarnings ? currentEarnings.doubleValue ? currentEarnings.doubleValue : currentEarnings.integerValue : 0;
                 let newSales = currentSales ? currentSales.integerValue ? currentSales.integerValue : 0 : 0;
+                let newSaleHistory = currentSaleHistory ? currentSaleHistory : [];
 
                 console.log("CURRENT EARNINGS:", currentEarnings)
                 if (currentEarnings && (parseFloat(currentEarnings.integerValue) > 0.00 || parseFloat(currentEarnings.doubleValue) > 0.00)) {
@@ -54,13 +56,17 @@ const Checkout = ({ price, docId, sellerEmail }) => {
                 }
 
                 newSales = parseInt(newSales) + 1;
+                let newData = data;
+                    newData.timestamp = new Date().now();
+                    console.log(newData);
+                    newSaleHistory.push(newData);
 
                 const userDocsSnap = query(usersDoc, where("email", "==", sellerEmail));
                 getDocs(userDocsSnap).then(snapshot2 => {
                     console.log("HELLO");
                     const id = snapshot2.docs[0].id;
                     const usersDocRef = doc(db, "users", id);
-                    updateDoc(usersDocRef, { earnings: parseFloat(newEarnings), sales: parseInt(newSales) }).then(() => {
+                    updateDoc(usersDocRef, { earnings: parseFloat(newEarnings), sales: parseInt(newSales),  }).then(() => {
                         alert(`Transaction completed by ${name}`);
                     });
                 })                

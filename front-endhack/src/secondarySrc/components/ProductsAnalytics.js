@@ -316,8 +316,8 @@ export default function ProductsAnalytics() {
                         <YAxis />
                         <Tooltip />
                         <Legend />
-                        <Line type="monotone" dataKey="pv" stroke="#8884d8" activeDot={{ r: 8 }} />
-                        <Line type="monotone" dataKey="uv" stroke="#82ca9d" />
+                        <Line type="monotone" strokeWidth={3} dataKey="pv" stroke="#8884d8" activeDot={{ r: 8 }} />
+                        <Line type="monotone" dataKey="uv" strokeWidth={3} stroke="#82ca9d" />
                         </LineChart>
                 </div>
                 <div className={`w-[33.35%] bg-white rounded-xl py-2 px-10 h-full`}>
